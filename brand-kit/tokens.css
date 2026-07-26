@@ -1,0 +1,85 @@
+/* =========================================================================
+   Siganext — Design Tokens
+   Single source of truth for the "Signal -> Power -> Data" brand system.
+   Import this before brand.css. Everything else references these variables.
+   ========================================================================= */
+
+:root {
+  /* ---- COLOR ---------------------------------------------------------- */
+  --grid-navy:      #0B1220;  /* base dark — night sky / circuit board      */
+  --panel-mist:     #EDEFEA;  /* base light — cool sage-white (NOT cream)   */
+  --signal-teal:    #2FB8C6;  /* primary accent — connectivity / data       */
+  --marigold-gold:  #E8A33D;  /* secondary accent — solar / sun             */
+  --sahyadri-green: #1F6E4A;  /* tertiary accent — sustainability (sparing) */
+  --ink:            #10151F;  /* text on light backgrounds                  */
+  --paper:          #F5F7FA;  /* text on dark backgrounds                   */
+
+  /* semantic aliases (use these in components) */
+  --bg-dark:        var(--grid-navy);
+  --bg-light:       var(--panel-mist);
+  --text-on-dark:   var(--paper);
+  --text-on-light:  var(--ink);
+  --accent-primary: var(--signal-teal);
+  --accent-solar:   var(--marigold-gold);
+  --accent-earth:   var(--sahyadri-green);
+
+  /* tinted surfaces (derived, low-chroma) */
+  --teal-tint:      rgba(47, 184, 198, 0.12);
+  --gold-tint:      rgba(232, 163, 61, 0.14);
+  --green-tint:     rgba(31, 110, 74, 0.12);
+
+  /* hairlines / dividers */
+  --line-on-dark:   rgba(245, 247, 250, 0.14);
+  --line-on-light:  rgba(16, 21, 31, 0.12);
+
+  /* ---- TYPOGRAPHY ----------------------------------------------------- */
+  --font-display: "Space Grotesk", system-ui, sans-serif;        /* headlines / hero */
+  --font-body:    "IBM Plex Sans", system-ui, sans-serif;        /* paragraphs / UI  */
+  --font-mono:    "IBM Plex Mono", ui-monospace, monospace;      /* eyebrows / spec # */
+
+  /* fluid display scale (clamp: min, preferred-vw, max) */
+  --fs-hero:    clamp(2.75rem, 7vw, 6rem);
+  --fs-h1:      clamp(2rem, 4.5vw, 3.5rem);
+  --fs-h2:      clamp(1.6rem, 3vw, 2.5rem);
+  --fs-h3:      clamp(1.25rem, 2vw, 1.6rem);
+  --fs-body:    1.0625rem;          /* 17px */
+  --fs-small:   0.9375rem;          /* 15px */
+  --fs-utility: 0.75rem;            /* 12px — mono labels */
+
+  --tracking-display: -0.02em;      /* tight tracking on headlines */
+  --tracking-mono:    0.08em;       /* eyebrow / nav / spec numbers */
+
+  /* ---- SPACING -------------------------------------------------------- */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 5rem;
+  --space-7: 8rem;
+
+  --maxw: 1200px;
+  --radius: 14px;
+
+  /* ---- MOTION --------------------------------------------------------- */
+  --ease-quiet: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur-reveal: 0.7s;
+  --dur-hover:  0.25s;
+}
+
+/* Reduced-motion: neutralize all transition/animation durations globally.
+   JS (hero) reads this too and freezes to the static end-state. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-reveal: 0.001s;
+    --dur-hover:   0.001s;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

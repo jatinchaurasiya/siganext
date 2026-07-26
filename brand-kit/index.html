@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Siganext — Signal → Power → Data</title>
+  <meta name="description" content="Siganext converges connectivity, solar, and IT into one continuous system: signal becomes power becomes data." />
+  <link rel="stylesheet" href="tokens.css" />
+  <link rel="stylesheet" href="brand.css" />
+</head>
+<body>
+
+  <!-- ================= NAV ================= -->
+  <header class="nav">
+    <div class="nav__brand">
+      <img src="assets/siganextlogo.png" alt="Siganext logo" />
+      <span class="nav-label">SIGANEXT</span>
+    </div>
+    <nav class="nav__links">
+      <a class="nav-label" href="#services">Verticals</a>
+      <a class="nav-label" href="#system">The System</a>
+      <a class="nav-label" href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ================= HERO (orchestrated motion) ================= -->
+  <section class="hero" id="top">
+    <canvas class="hero__canvas" id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero__static" aria-hidden="true"></div>
+    <div class="hero__scrim"></div>
+    <div class="container hero__content">
+      <p class="eyebrow">Signal → Power → Data</p>
+      <h1>One system. Three converged verticals.</h1>
+      <p>
+        Connectivity, solar, and IT aren't glued together — they're one
+        continuous flow. A thin signal becomes current, becomes insight.
+      </p>
+      <div class="hero__actions">
+        <a class="btn" href="#services">Explore verticals</a>
+        <a class="btn btn--ghost" href="#system">See the system</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION DIVIDER TRACE ================= -->
+  <svg class="trace-divider" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="divGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0"   stop-color="#2FB8C6"/>
+        <stop offset="0.5" stop-color="#E8A33D"/>
+        <stop offset="1"   stop-color="#1F6E4A"/>
+      </linearGradient>
+    </defs>
+    <path id="divPath" d="M0,32 C200,8 400,56 600,32 S1000,8 1200,32"
+          stroke="url(#divGrad)" stroke-width="2" fill="none"/>
+  </svg>
+
+  <!-- ================= SERVICES (01–04 taxonomy) ================= -->
+  <section class="section" id="services">
+    <div class="container">
+      <p class="eyebrow reveal">The four verticals · MOA taxonomy</p>
+      <h2 class="reveal">Convergence, by design</h2>
+
+      <div class="service-grid">
+        <article class="service-card reveal">
+          <span class="vertical-index">01</span>
+          <div class="accent-bar"></div>
+          <h3>Connectivity</h3>
+          <p>Signal infrastructure that carries data where the grid can't.</p>
+        </article>
+
+        <article class="service-card reveal">
+          <span class="vertical-index">02</span>
+          <div class="accent-bar"></div>
+          <h3>Solar</h3>
+          <p>Power generation that turns sun into the current behind the signal.</p>
+        </article>
+
+        <article class="service-card reveal">
+          <span class="vertical-index">03</span>
+          <div class="accent-bar"></div>
+          <h3>IT Systems</h3>
+          <p>The nodes and dashboards where data resolves into decisions.</p>
+        </article>
+
+        <article class="service-card reveal">
+          <span class="vertical-index">04</span>
+          <div class="accent-bar"></div>
+          <h3>Integration</h3>
+          <p>Orchestration that keeps signal, power, and data in one loop.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= THE SYSTEM ================= -->
+  <section class="section section--dark" id="system">
+    <div class="container">
+      <p class="eyebrow reveal">The trace</p>
+      <h2 class="reveal">From pulse to node</h2>
+      <p class="reveal">
+        The recurring motif: a glowing trace starts as a data pulse (teal),
+        runs as a solar current (gold), and resolves into a node (green).
+      </p>
+
+      <div class="reveal" style="display:flex; gap:var(--space-4); flex-wrap:wrap; margin-top:var(--space-4);">
+        <!-- icon language: data pulse -->
+        <svg class="trace-ico" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M4,24 H14 L18,12 L26,36 L30,24 H44" stroke="#2FB8C6"/>
+        </svg>
+        <!-- icon language: solar current -->
+        <svg class="trace-ico" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M4,24 H16 M20,24 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0 M36,24 H44"
+                stroke="#E8A33D"/>
+        </svg>
+        <!-- icon language: node -->
+        <svg class="trace-ico" viewBox="0 0 48 48" aria-hidden="true">
+          <line x1="4" y1="24" x2="20" y2="24" stroke="#1F6E4A"/>
+          <circle cx="24" cy="24" r="6" stroke="#1F6E4A"/>
+          <line x1="28" y1="24" x2="44" y2="24" stroke="#1F6E4A"/>
+        </svg>
+      </div>
+
+      <div class="reveal" style="margin-top:var(--space-5); display:flex; gap:var(--space-5); flex-wrap:wrap;">
+        <div>
+          <div class="data-figure">02</div>
+          <p class="mono" style="opacity:.7;">MW solar capacity</p>
+        </div>
+        <div>
+          <div class="data-figure">04</div>
+          <p class="mono" style="opacity:.7;">converged verticals</p>
+        </div>
+        <div>
+          <div class="data-figure">1</div>
+          <p class="mono" style="opacity:.7;">continuous system</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="section" id="contact">
+    <div class="container">
+      <p class="eyebrow reveal">CIN · U12345MH2024PTC000000</p>
+      <h2 class="reveal">Let's converge your stack.</h2>
+      <p class="reveal">Maharashtra, India — signal, sun, and systems under one roof.</p>
+    </div>
+  </section>
+
+  <!-- ================= HERO MOTION (Three.js + GSAP) ================= -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "gsap": "https://unpkg.com/gsap@3.12.5/index.js"
+    }
+  }
+  </script>
+  <script type="module" src="hero.js"></script>
+
+  <!-- quiet scroll reveals -->
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

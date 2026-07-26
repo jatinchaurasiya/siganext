@@ -1,0 +1,229 @@
+/* =========================================================================
+   Siganext — Brand System Styles
+   Implements typography, color usage, the 01-04 vertical numbering,
+   the flowing-trace motif, and quiet scroll reveals.
+   Depends on: tokens.css
+   ========================================================================= */
+
+/* ---- FONTS ----------------------------------------------------------- */
+/* Plex ships a Devanagari cut — deliberate, for the planned Hindi toggle. */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+/* ---- BASE ------------------------------------------------------------ */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--text-on-light);
+  background: var(--bg-light);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.05;
+  margin: 0 0 var(--space-3);
+}
+
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+
+p { margin: 0 0 var(--space-3); max-width: 62ch; }
+
+a { color: var(--accent-primary); text-decoration: none; }
+
+/* ---- UTILITY / MONO TYPE --------------------------------------------- */
+/* Eyebrows, nav labels, CIN/spec numbers, data figures.
+   Always uppercase, tracked, small. */
+.eyebrow,
+.nav-label,
+.mono,
+.spec-num {
+  font-family: var(--font-mono);
+  font-size: var(--fs-utility);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-mono);
+  line-height: 1.4;
+}
+
+.eyebrow { color: var(--accent-primary); margin: 0 0 var(--space-2); }
+.nav-label { color: inherit; opacity: 0.7; }
+
+/* Data figures — larger mono numerals */
+.data-figure {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+/* ---- LAYOUT ---------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--space-3);
+}
+
+.section { padding-block: var(--space-7); }
+.section--dark { background: var(--bg-dark); color: var(--text-on-dark); }
+.section--dark a { color: var(--accent-primary); }
+
+/* ---- THE 01/02/03/04 TAXONOMY ---------------------------------------- */
+/* Earned markers — services only, never decorative elsewhere. */
+.vertical-index {
+  font-family: var(--font-mono);
+  font-size: var(--fs-utility);
+  font-weight: 500;
+  letter-spacing: var(--tracking-mono);
+  color: var(--accent-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+.vertical-index::before {
+  content: "";
+  width: 28px; height: 1px;
+  background: var(--accent-primary);
+  display: inline-block;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.service-card {
+  border: 1px solid var(--line-on-light);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  background: #fff;
+  transition: border-color var(--dur-hover) var(--ease-quiet),
+              transform var(--dur-hover) var(--ease-quiet);
+}
+.service-card:hover { border-color: var(--accent-primary); }
+
+.service-card h3 { margin-top: var(--space-2); }
+.service-card .accent-bar {
+  height: 3px; width: 40px; border-radius: 2px;
+  background: var(--accent-primary);
+  margin-bottom: var(--space-2);
+}
+.service-card:nth-child(2) .accent-bar { background: var(--accent-solar); }
+.service-card:nth-child(3) .accent-bar { background: var(--accent-earth); }
+.service-card:nth-child(4) .accent-bar { background: var(--accent-primary); }
+
+/* ---- TRACE MOTIF (icon language + section dividers) ------------------ */
+/* A thin glowing path: data pulse -> solar current -> node.
+   Drawn as an inline SVG; the gradient encodes the convergence. */
+.trace-ico { width: 48px; height: 48px; display: block; }
+.trace-ico path,
+.trace-ico line {
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+}
+.trace-divider {
+  width: 100%; height: 64px; display: block; margin: 0;
+  overflow: visible;
+}
+
+/* ---- SCROLL REVEAL (quiet) ------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--dur-reveal) var(--ease-quiet),
+              transform var(--dur-reveal) var(--ease-quiet);
+  will-change: opacity, transform;
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* ---- BUTTONS --------------------------------------------------------- */
+.btn {
+  font-family: var(--font-mono);
+  font-size: var(--fs-utility);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-mono);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  border: 1px solid var(--accent-primary);
+  background: var(--accent-primary);
+  color: var(--grid-navy);
+  cursor: pointer;
+  transition: background var(--dur-hover) var(--ease-quiet),
+              color var(--dur-hover) var(--ease-quiet);
+}
+.btn--ghost { background: transparent; color: var(--accent-primary); }
+.btn:hover { background: var(--accent-solar); border-color: var(--accent-solar); color: var(--grid-navy); }
+
+/* ---- HERO ------------------------------------------------------------ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  background: var(--bg-dark);
+  color: var(--text-on-dark);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+}
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+.hero h1 { font-size: var(--fs-hero); }
+.hero .eyebrow { color: var(--accent-primary); }
+.hero p { color: var(--paper); opacity: 0.85; }
+.hero__actions { display: flex; gap: var(--space-2); margin-top: var(--space-4); flex-wrap: wrap; }
+.hero__scrim {
+  position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(120% 120% at 70% 30%, transparent 40%, rgba(11,18,32,0.85) 100%);
+  pointer-events: none;
+}
+
+/* Static end-state for reduced motion / no-JS: show a flat trace image */
+.hero__static {
+  position: absolute; inset: 0; z-index: 0;
+  display: none;
+  place-items: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__canvas { display: none; }
+  .hero__static {
+    display: grid;
+    background:
+      radial-gradient(60% 60% at 30% 40%, var(--teal-tint), transparent 70%),
+      radial-gradient(50% 50% at 80% 70%, var(--gold-tint), transparent 70%);
+  }
+}
+
+/* ---- NAV ------------------------------------------------------------- */
+.nav {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 2;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-3) var(--space-3);
+  color: var(--text-on-dark);
+}
+.nav__brand { display: flex; align-items: center; gap: var(--space-1); }
+.nav__brand img { height: 34px; width: auto; }
+.nav__links { display: flex; gap: var(--space-3); }
+@media (max-width: 720px) { .nav__links { display: none; } }
