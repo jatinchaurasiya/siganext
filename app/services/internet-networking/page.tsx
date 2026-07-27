@@ -329,26 +329,30 @@ export default function InternetNetworkingPage() {
                 delay={i * 0.08}
                 className={i === SERVICE_BULLETS.length - 1 ? "md:col-span-2 lg:col-span-1" : ""}
               >
-                <Card3DTilt maxTilt={8} scale={1.02} className="h-full rounded-xl">
-                  <div className="bg-white rounded-xl p-6 md:p-8 border border-ink/10 shadow-sm hover:shadow-md hover:border-signal-teal/40 transition-all duration-300 h-full flex flex-col justify-between group">
-                    <div>
-                      <div className="w-12 h-12 rounded-lg bg-signal-teal/10 border border-signal-teal/25 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform duration-300">
-                        {bullet.icon}
+                <Card3DTilt maxTilt={8} scale={1.02} className="h-full">
+                  {/* Outer Shell - Doppelrand Architecture */}
+                  <div className="p-2 rounded-[1.75rem] bg-gradient-to-b from-white/80 to-white/40 border border-black/5 shadow-lg h-full">
+                    {/* Inner Core */}
+                    <div className="bg-white rounded-[calc(1.75rem-0.5rem)] p-6 md:p-8 border border-ink/5 shadow-[inset_0_1px_2px_rgba(255,255,255,1)] hover:shadow-2xl hover:border-signal-teal/40 transition-all duration-300 h-full flex flex-col justify-between group">
+                      <div>
+                        <div className="w-12 h-12 rounded-xl bg-signal-teal/10 border border-signal-teal/25 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+                          {bullet.icon}
+                        </div>
+                        <h3 className="font-display font-bold text-ink text-[1.3rem] tracking-[-0.01em]">
+                          {bullet.title}
+                        </h3>
+                        <p className="mt-3 text-ink/75 text-[0.95rem] leading-relaxed font-sans">
+                          {bullet.description}
+                        </p>
                       </div>
-                      <h3 className="font-display font-semibold text-ink text-[1.25rem] tracking-[-0.01em]">
-                        {bullet.title}
-                      </h3>
-                      <p className="mt-2.5 text-ink/75 text-[0.95rem] leading-relaxed font-body">
-                        {bullet.description}
-                      </p>
-                    </div>
-                    <div className="mt-6 pt-4 border-t border-ink/5 flex items-center justify-between text-ink/50">
-                      <span className="font-mono uppercase text-[10px] tracking-[0.08em]">
-                        Spec 0{i + 1}
-                      </span>
-                      <span className="font-mono text-xs text-signal-teal opacity-0 group-hover:opacity-100 transition-opacity">
-                        Engineered SLA →
-                      </span>
+                      <div className="mt-6 pt-4 border-t border-ink/5 flex items-center justify-between text-ink/50">
+                        <span className="font-mono uppercase text-[10px] tracking-[0.1em] text-signal-teal font-semibold">
+                          Spec // 0{i + 1}
+                        </span>
+                        <span className="font-mono text-xs text-signal-teal opacity-0 group-hover:opacity-100 transition-opacity">
+                          Engineered SLA →
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </Card3DTilt>

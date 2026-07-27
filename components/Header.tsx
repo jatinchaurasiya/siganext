@@ -150,24 +150,24 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+        className={`fixed top-3 md:top-4 inset-x-3 md:inset-x-6 max-w-7xl mx-auto z-50 transition-all duration-500 rounded-full ${
           scrolled
-            ? "bg-[#0B1220]/95 backdrop-blur-md border-b border-signal-teal/20 shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
-            : "bg-gradient-to-b from-[#0B1220] via-[#0B1220]/70 to-transparent border-b border-transparent"
+            ? "bg-[#0B1220]/90 backdrop-blur-xl border border-signal-teal/40 shadow-[0_10px_30px_rgba(0,0,0,0.6)] py-1"
+            : "bg-[#0B1220]/60 backdrop-blur-md border border-white/10 shadow-lg py-1.5"
         }`}
       >
-        <div className="container-site h-16 md:h-20 flex items-center justify-between gap-4">
+        <div className="px-4 md:px-6 h-12 md:h-14 flex items-center justify-between gap-4">
           {/* Wordmark */}
           <Link
             href="/"
-            className="font-display font-semibold text-paper text-[1.25rem] leading-none tracking-[-0.02em] flex items-center gap-2 hover:text-signal-teal transition-colors duration-200"
+            className="font-display font-bold text-paper text-[1.2rem] md:text-[1.35rem] leading-none tracking-[-0.02em] flex items-center gap-2 hover:text-signal-teal transition-colors duration-200"
           >
             Siganext
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-marigold-gold" />
+            <span className="inline-block w-2 h-2 rounded-full bg-marigold-gold shadow-[0_0_8px_#E8A33D]" />
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-8">
             {NAV.map((item) =>
               item.children ? (
                 <div
@@ -179,29 +179,29 @@ export default function Header() {
                   <button
                     type="button"
                     onClick={() => setServicesOpen((s) => !s)}
-                    className={`${linkBase} text-slate-200 hover:text-paper flex items-center gap-1.5 py-2`}
+                    className={`${linkBase} text-slate-200 hover:text-signal-teal flex items-center gap-1.5 py-2`}
                   >
                     {item.label}
                     <ChevronDown
                       className={`transition-transform duration-200 ${
-                        servicesOpen ? "rotate-180" : ""
+                        servicesOpen ? "rotate-180 text-signal-teal" : ""
                       }`}
                     />
                   </button>
                   <AnimatePresence>
                     {servicesOpen && (
                       <motion.div
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 8 }}
-                        transition={{ duration: 0.18, ease: [0.22, 0.61, 0.36, 1] }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-1 min-w-[240px] bg-grid-navy/95 backdrop-blur-md border border-signal-teal/20 rounded-lg overflow-hidden py-1"
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                        transition={{ duration: 0.2, ease: [0.32, 0.72, 0, 1] }}
+                        className="absolute top-full left-1/2 -translate-x-1/2 mt-3 min-w-[260px] bg-grid-navy/95 backdrop-blur-2xl border border-signal-teal/30 rounded-2xl overflow-hidden p-2 shadow-2xl"
                       >
                         {item.children.map((c) => (
                           <Link
                             key={c.href}
                             href={c.href}
-                            className="block px-4 py-2.5 font-mono uppercase text-[11px] tracking-[0.08em] text-slate-200 hover:text-paper hover:bg-signal-teal/10 transition-colors duration-200"
+                            className="block px-4 py-3 rounded-xl font-mono uppercase text-[10px] tracking-[0.1em] text-slate-200 hover:text-paper hover:bg-signal-teal/15 transition-all duration-200"
                           >
                             {c.label}
                           </Link>
@@ -216,8 +216,8 @@ export default function Header() {
                   href={item.href}
                   className={`${linkBase} ${
                     pathname === item.href
-                      ? "text-paper"
-                      : "text-slate-200 hover:text-paper"
+                      ? "text-signal-teal font-semibold"
+                      : "text-slate-200 hover:text-signal-teal"
                   }`}
                 >
                   {item.label}
@@ -233,15 +233,15 @@ export default function Header() {
               href={PHONE_HREF}
               aria-label="Call Siganext at +91 XXXXX XXXXX"
               title="Call Siganext"
-              className="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-signal-teal/40 text-signal-teal hover:bg-signal-teal/10 hover:border-signal-teal transition-colors duration-200"
+              className="hidden md:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-signal-teal/40 text-signal-teal hover:bg-signal-teal/10 hover:border-signal-teal transition-all duration-200"
             >
               <PhoneIcon className="w-3.5 h-3.5" />
-              <span className="font-mono uppercase text-[11px] tracking-[0.08em] text-paper/90">
+              <span className="font-mono uppercase text-[10px] tracking-[0.08em] text-paper/90">
                 +91 XXXXX XXXXX
               </span>
             </a>
 
-            <MagneticButton href="/contact" className="btn btn-primary hidden md:inline-flex shadow-lg hover:shadow-signal-teal/30">
+            <MagneticButton href="/contact" className="btn btn-primary hidden md:inline-flex shadow-lg hover:shadow-signal-teal/40 px-5 py-2 text-xs">
               Get a Free Quote
             </MagneticButton>
 
@@ -249,7 +249,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setMobileOpen(true)}
-              className="lg:hidden text-paper p-1 -mr-1"
+              className="lg:hidden text-paper p-2 -mr-1 rounded-full hover:bg-white/10 transition-colors"
               aria-label="Open menu"
             >
               <HamburgerIcon />

@@ -466,29 +466,39 @@ function ServiceCard({
   href: string;
 }) {
   return (
-    <Card3DTilt maxTilt={10} scale={1.03} className="h-full rounded-xl">
-      <Link
-        href={href}
-        className="group relative block bg-white rounded-xl p-6 md:p-7 border border-ink/10 shadow-sm hover:shadow-xl hover:border-[#2FB8C6]/50 transition-all duration-300 overflow-hidden h-full"
-      >
-        {/* hover trace line — animated top border */}
-        <span
-          aria-hidden
-          className="absolute left-0 top-0 h-[3px] w-0 bg-gradient-to-r from-[#2FB8C6] to-[#E8A33D] group-hover:w-full transition-all duration-500 ease-out"
-        />
-        <div className="flex items-center justify-between">
-          <span className="font-mono font-bold text-sm tracking-[0.08em] text-ink/40 group-hover:text-[#E8A33D] transition-colors duration-200">
-            {index}
-          </span>
-          <span className="font-mono text-sm text-ink/30 group-hover:text-[#2FB8C6] group-hover:translate-x-1 transition-all duration-200">
-            →
-          </span>
-        </div>
-        <h3 className="font-display font-semibold text-ink text-[1.25rem] tracking-[-0.01em] mt-4 leading-tight group-hover:text-[#2FB8C6] transition-colors duration-200">
-          {title}
-        </h3>
-        <p className="mt-2.5 text-ink/75 text-[0.93rem] leading-relaxed">{blurb}</p>
-      </Link>
+    <Card3DTilt maxTilt={10} scale={1.03} className="h-full">
+      {/* Outer Shell - Doppelrand Architecture */}
+      <div className="p-2 rounded-[1.75rem] bg-gradient-to-b from-white/80 to-white/40 border border-black/5 shadow-lg h-full">
+        {/* Inner Core */}
+        <Link
+          href={href}
+          className="group relative block bg-white rounded-[calc(1.75rem-0.5rem)] p-6 md:p-7 shadow-[inset_0_1px_2px_rgba(255,255,255,1)] hover:shadow-2xl hover:border-signal-teal/40 transition-all duration-300 overflow-hidden h-full flex flex-col justify-between"
+        >
+          {/* hover trace line — animated top border */}
+          <span
+            aria-hidden
+            className="absolute left-0 top-0 h-[3px] w-0 bg-gradient-to-r from-signal-teal to-marigold-gold group-hover:w-full transition-all duration-500 ease-out"
+          />
+          <div>
+            <div className="flex items-center justify-between">
+              <span className="font-mono font-bold text-xs tracking-[0.15em] text-signal-teal/80 group-hover:text-marigold-gold transition-colors duration-200">
+                // {index}
+              </span>
+              <span className="w-7 h-7 rounded-full bg-signal-teal/10 flex items-center justify-center font-mono text-xs text-signal-teal group-hover:bg-signal-teal group-hover:text-paper group-hover:translate-x-1 group-hover:-translate-y-[1px] transition-all duration-300">
+                ↗
+              </span>
+            </div>
+            <h3 className="font-display font-bold text-ink text-[1.3rem] tracking-[-0.01em] mt-4 leading-tight group-hover:text-signal-teal transition-colors duration-200">
+              {title}
+            </h3>
+            <p className="mt-3 text-ink/75 text-[0.93rem] leading-relaxed font-sans">{blurb}</p>
+          </div>
+          <div className="mt-6 pt-4 border-t border-ink/5 flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-signal-teal/80">
+            <span>Explore Solution</span>
+            <span>→</span>
+          </div>
+        </Link>
+      </div>
     </Card3DTilt>
   );
 }
@@ -496,7 +506,7 @@ function ServiceCard({
 // Inline badge chip — used to visually distinguish trust-strip items like CIN.
 function TrustBadge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-1.5 bg-signal-teal/10 text-signal-teal border border-signal-teal/25 rounded-full px-2.5 py-0.5 font-mono uppercase text-[10px] tracking-[0.08em]">
+    <span className="inline-flex items-center gap-1.5 bg-signal-teal/15 text-signal-teal border border-signal-teal/30 rounded-full px-3 py-1 font-mono uppercase text-[10px] tracking-[0.1em] shadow-sm">
       {children}
     </span>
   );
@@ -512,67 +522,71 @@ function CityTile({
   featured?: boolean;
 }) {
   return (
-    <div
-      className={`group relative overflow-hidden rounded-xl ring-1 ring-ink/10 h-full min-h-[200px] sm:min-h-[220px] ${
-        featured ? "md:min-h-[260px]" : ""
-      }`}
-      style={{
-        background: featured
-          ? "linear-gradient(135deg, #13203a 0%, #0B1220 70%, #07101e 100%)"
-          : "linear-gradient(135deg, #1a2440 0%, #0B1220 80%)",
-      }}
-    >
-      {/* faint grid — circuit-board metaphor */}
+    /* Outer Shell */
+    <div className={`p-1.5 rounded-[1.5rem] ${featured ? "bg-gradient-to-b from-marigold-gold/30 to-signal-teal/20 border border-marigold-gold/40" : "bg-white/10 border border-white/10"} h-full`}>
+      {/* Inner Core */}
       <div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.14] group-hover:opacity-[0.25] transition-opacity duration-500"
+        className={`group relative overflow-hidden rounded-[calc(1.5rem-0.375rem)] h-full min-h-[200px] sm:min-h-[220px] ${
+          featured ? "md:min-h-[260px]" : ""
+        }`}
         style={{
-          backgroundImage:
-            "linear-gradient(rgba(47,184,198,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(47,184,198,0.6) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
+          background: featured
+            ? "linear-gradient(135deg, #13203a 0%, #0B1220 70%, #07101e 100%)"
+            : "linear-gradient(135deg, #1a2440 0%, #0B1220 80%)",
         }}
-      />
-      {/* brand glow */}
-      <div
-        aria-hidden
-        className="absolute inset-0 transition-opacity duration-500"
-        style={{
-          background:
-            "radial-gradient(60% 60% at 70% 30%, rgba(47,184,198,0.18), transparent 65%)",
-        }}
-      />
-      {/* zoom-on-hover overlay */}
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out"
-        style={{
-          background:
-            "radial-gradient(80% 80% at 50% 40%, rgba(232,163,61,0.18), transparent 70%)",
-        }}
-      />
-      <div className="relative h-full p-4 sm:p-5 flex flex-col justify-end">
-        <div className="flex items-center gap-1.5 mb-1.5">
-          <span
-            aria-hidden
-            className="inline-block w-1.5 h-1.5 rounded-full shrink-0"
-            style={{
-              background: featured ? "var(--marigold-gold)" : "var(--signal-teal)",
-            }}
-          />
-          <span className="font-mono uppercase text-[9px] sm:text-[10px] tracking-[0.08em] text-paper/50 truncate">
-            {featured ? "Headquarters" : "Coverage"}
-          </span>
+      >
+        {/* faint grid — circuit-board metaphor */}
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.14] group-hover:opacity-[0.25] transition-opacity duration-500"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(47,184,198,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(47,184,198,0.6) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
+        {/* brand glow */}
+        <div
+          aria-hidden
+          className="absolute inset-0 transition-opacity duration-500"
+          style={{
+            background:
+              "radial-gradient(60% 60% at 70% 30%, rgba(47,184,198,0.18), transparent 65%)",
+          }}
+        />
+        {/* zoom-on-hover overlay */}
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out"
+          style={{
+            background:
+              "radial-gradient(80% 80% at 50% 40%, rgba(232,163,61,0.18), transparent 70%)",
+          }}
+        />
+        <div className="relative h-full p-5 sm:p-6 flex flex-col justify-end">
+          <div className="flex items-center gap-2 mb-2">
+            <span
+              aria-hidden
+              className="inline-block w-2 h-2 rounded-full shrink-0 animate-pulse"
+              style={{
+                background: featured ? "var(--marigold-gold)" : "var(--signal-teal)",
+              }}
+            />
+            <span className="font-mono uppercase text-[9px] sm:text-[10px] tracking-[0.1em] text-paper/60 truncate">
+              {featured ? "Headquarters NOC" : "Carrier Coverage"}
+            </span>
+          </div>
+          <h3
+            className={`font-display font-bold text-paper tracking-[-0.01em] break-words ${
+              featured ? "text-[1.4rem] sm:text-[1.6rem]" : "text-[1.15rem] sm:text-[1.3rem]"
+            }`}
+          >
+            {name}
+          </h3>
+          <p className="mt-1.5 text-paper/70 text-[0.82rem] sm:text-[0.88rem] leading-relaxed">
+            {hook}
+          </p>
         </div>
-        <h3
-          className={`font-display font-semibold text-paper tracking-[-0.01em] break-words ${
-            featured ? "text-[1.35rem] sm:text-[1.5rem]" : "text-[1.1rem] sm:text-[1.25rem]"
-          }`}
-        >
-          {name}
-        </h3>
-        <p className="mt-1 text-paper/65 text-[0.8rem] sm:text-[0.85rem] leading-relaxed">
-          {hook}
-        </p>
       </div>
     </div>
   );
