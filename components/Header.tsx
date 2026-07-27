@@ -1,13 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
-import MagneticButton from "@/components/MagneticButton";
-import BrandLogo from "@/components/BrandLogo";
+import { motion, AnimatePresence } from "framer-motion";
 
-const NAV = [
+const NAV_ITEMS = [
   { label: "Home", href: "/" },
   {
     label: "Services",
@@ -24,181 +22,86 @@ const NAV = [
   { label: "Contact", href: "/contact" },
 ];
 
-const PHONE_HREF = "tel:+910000000000";
-
-function PhoneIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.69 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.26a2 2 0 0 1 2.11-.45c.74.33 1.53.56 2.34.69A2 2 0 0 1 22 16.92z" />
-    </svg>
-  );
-}
-
-function ChevronDown({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width="10"
-      height="10"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="m6 9 6 6 6-6" />
-    </svg>
-  );
-}
-
-function HamburgerIcon() {
-  return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
-  );
-}
-
-function CloseIcon() {
-  return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M18 6 6 18M6 6l12 12" />
-    </svg>
-  );
-}
-
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // lock body scroll when mobile menu open
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileOpen]);
-
-  // close mobile menu on escape key
-  useEffect(() => {
-    if (!mobileOpen) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setMobileOpen(false);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [mobileOpen]);
-
-  // close mobile menu on route change (deferred via microtask to avoid
-  // synchronous setState within the effect body — see react-hooks/set-state-in-effect)
-  useEffect(() => {
-    queueMicrotask(() => {
-      setMobileOpen(false);
-      setServicesOpen(false);
-    });
+    setMobileOpen(false);
+    setDropdownOpen(false);
   }, [pathname]);
 
-  // Header text color: light text (paper) over transparent-dark or scrolled-dark.
-  // slate-900 over light is not needed because every page opens with a dark hero band
-  // (PageHero on secondary pages, hero on home). So we keep #F8FAFC / --paper throughout.
-  const linkBase =
-    "font-mono uppercase text-[11px] tracking-[0.08em] transition-colors duration-200";
-
   return (
-    <>
-      <header
-        className={`fixed top-3 md:top-4 inset-x-3 md:inset-x-6 max-w-7xl mx-auto z-50 transition-all duration-500 rounded-full ${
-          scrolled
-            ? "bg-[#0B1220]/90 backdrop-blur-xl border border-signal-teal/40 shadow-[0_10px_30px_rgba(0,0,0,0.6)] py-1"
-            : "bg-[#0B1220]/60 backdrop-blur-md border border-white/10 shadow-lg py-1.5"
-        }`}
-      >
-        <div className="px-4 md:px-6 h-12 md:h-14 flex items-center justify-between gap-4">
-          {/* Wordmark with Brand Logo */}
-          <BrandLogo height={32} />
+    <header
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-obsidian/92 backdrop-blur-md border-b border-champagne/20 py-3 shadow-xl text-paper"
+          : "bg-transparent py-5 text-paper"
+      }`}
+    >
+      <div className="container-site flex items-center justify-between gap-4">
+        {/* Wordmark */}
+        <Link
+          href="/"
+          className="font-display font-extrabold text-paper text-xl md:text-2xl tracking-[-0.02em] flex items-center gap-1.5 hover:text-champagne transition-colors"
+        >
+          SIGANEXT
+          <span className="w-2 h-2 rounded-full bg-champagne shadow-[0_0_8px_#C9A24B]" />
+        </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-8">
-            {NAV.map((item) =>
-              item.children ? (
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center gap-8 font-mono text-xs uppercase tracking-[0.08em]">
+          {NAV_ITEMS.map((item) => (
+            <div key={item.label} className="relative group">
+              {item.children ? (
                 <div
-                  key={item.label}
-                  className="relative"
-                  onMouseEnter={() => setServicesOpen(true)}
-                  onMouseLeave={() => setServicesOpen(false)}
+                  onMouseEnter={() => setDropdownOpen(true)}
+                  onMouseLeave={() => setDropdownOpen(false)}
+                  className="relative py-2"
                 >
                   <button
-                    type="button"
-                    onClick={() => setServicesOpen((s) => !s)}
-                    className={`${linkBase} text-slate-200 hover:text-signal-teal flex items-center gap-1.5 py-2`}
+                    className="flex items-center gap-1 text-paper/85 hover:text-champagne transition-colors"
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
                   >
                     {item.label}
-                    <ChevronDown
-                      className={`transition-transform duration-200 ${
-                        servicesOpen ? "rotate-180 text-signal-teal" : ""
+                    <svg
+                      className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                        dropdownOpen ? "rotate-180 text-champagne" : ""
                       }`}
-                    />
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
                   </button>
+
                   <AnimatePresence>
-                    {servicesOpen && (
+                    {dropdownOpen && (
                       <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 8, scale: 0.95 }}
-                        transition={{ duration: 0.2, ease: [0.32, 0.72, 0, 1] }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-3 min-w-[260px] bg-grid-navy/95 backdrop-blur-2xl border border-signal-teal/30 rounded-2xl overflow-hidden p-2 shadow-2xl"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute top-full left-0 w-64 p-3 rounded-2xl bg-obsidian/95 backdrop-blur-xl border border-champagne/30 shadow-2xl space-y-1"
                       >
-                        {item.children.map((c) => (
+                        {item.children.map((child) => (
                           <Link
-                            key={c.href}
-                            href={c.href}
-                            className="block px-4 py-3 rounded-xl font-mono uppercase text-[10px] tracking-[0.1em] text-slate-200 hover:text-paper hover:bg-signal-teal/15 transition-all duration-200"
+                            key={child.href}
+                            href={child.href}
+                            className="block px-3 py-2 rounded-xl text-[11px] text-paper/80 hover:text-champagne hover:bg-champagne/10 transition-colors"
                           >
-                            {c.label}
+                            {child.label}
                           </Link>
                         ))}
                       </motion.div>
@@ -207,158 +110,95 @@ export default function Header() {
                 </div>
               ) : (
                 <Link
-                  key={item.label}
                   href={item.href}
-                  className={`${linkBase} ${
-                    pathname === item.href
-                      ? "text-signal-teal font-semibold"
-                      : "text-slate-200 hover:text-signal-teal"
+                  className={`py-2 transition-colors ${
+                    pathname === item.href ? "text-champagne font-bold" : "text-paper/85 hover:text-champagne"
                   }`}
                 >
                   {item.label}
                 </Link>
-              )
-            )}
-          </nav>
+              )}
+            </div>
+          ))}
+        </nav>
 
-          {/* Right cluster */}
-          <div className="flex items-center gap-3 md:gap-4">
-            {/* Phone — click-to-call with icon and placeholder */}
-            <a
-              href={PHONE_HREF}
-              aria-label="Call Siganext at +91 XXXXX XXXXX"
-              title="Call Siganext"
-              className="hidden md:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-signal-teal/40 text-signal-teal hover:bg-signal-teal/10 hover:border-signal-teal transition-all duration-200"
-            >
-              <PhoneIcon className="w-3.5 h-3.5" />
-              <span className="font-mono uppercase text-[10px] tracking-[0.08em] text-paper/90">
-                +91 XXXXX XXXXX
-              </span>
-            </a>
+        {/* CTA Buttons */}
+        <div className="hidden lg:flex items-center gap-4">
+          <a
+            href="tel:+910000000000"
+            className="font-mono text-xs uppercase tracking-[0.08em] text-paper/80 hover:text-champagne transition-colors flex items-center gap-2"
+          >
+            <svg className="w-4 h-4 text-champagne" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+              />
+            </svg>
+            Call
+          </a>
 
-            <MagneticButton href="/contact" className="btn btn-primary hidden md:inline-flex shadow-lg hover:shadow-signal-teal/40 px-5 py-2 text-xs">
-              Get a Free Quote
-            </MagneticButton>
-
-            {/* Mobile hamburger */}
-            <button
-              type="button"
-              onClick={() => setMobileOpen(true)}
-              className="lg:hidden text-paper p-2 -mr-1 rounded-full hover:bg-white/10 transition-colors"
-              aria-label="Open menu"
-            >
-              <HamburgerIcon />
-            </button>
-          </div>
+          <Link href="/contact" className="btn btn-champagne">
+            Get a Free Quote →
+          </Link>
         </div>
-      </header>
 
-      {/* Mobile full-screen overlay */}
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="lg:hidden p-2 rounded-lg text-paper hover:text-champagne"
+          aria-label="Toggle Navigation Menu"
+        >
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {mobileOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
+      </div>
+
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[60] bg-grid-navy lg:hidden"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-obsidian/98 border-b border-champagne/30 overflow-hidden"
           >
-            <div className="container-site h-16 flex items-center justify-between border-b border-signal-teal/20">
-              <span className="font-display font-semibold text-paper text-[1.25rem] flex items-center gap-2">
-                Siganext
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-marigold-gold" />
-              </span>
-              <button
-                type="button"
-                onClick={() => setMobileOpen(false)}
-                className="text-paper p-1 -mr-1"
-                aria-label="Close menu"
-              >
-                <CloseIcon />
-              </button>
-            </div>
-
-            <nav className="container-site flex flex-col pt-6">
-              <MobileLink href="/" label="Home" index={0} />
-              {/* Services group */}
-              <div className="pt-6">
-                <div className="font-mono uppercase text-[11px] tracking-[0.08em] text-signal-teal pb-3">
-                  Services
-                </div>
-                <div className="flex flex-col gap-3 pl-3 border-l border-signal-teal/20">
-                  {NAV.find((n) => n.label === "Services")?.children?.map(
-                    (c, i) => (
-                      <MobileLink
-                        key={c.href}
-                        href={c.href}
-                        label={c.label}
-                        index={2 + i}
-                        small
-                      />
-                    )
+            <div className="container-site py-6 space-y-4 font-mono text-xs uppercase tracking-[0.08em]">
+              {NAV_ITEMS.map((item) => (
+                <div key={item.label}>
+                  {item.children ? (
+                    <div className="space-y-2">
+                      <span className="text-champagne font-semibold">{item.label}</span>
+                      <div className="pl-4 space-y-2">
+                        {item.children.map((child) => (
+                          <Link key={child.href} href={child.href} className="block text-paper/80 hover:text-champagne">
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <Link href={item.href} className="block text-paper/80 hover:text-champagne">
+                      {item.label}
+                    </Link>
                   )}
                 </div>
-              </div>
-              <MobileLink href="/about" label="About" index={7} />
-              <MobileLink
-                href="/government-enterprise"
-                label="Government & Enterprise"
-                index={8}
-              />
-              <MobileLink href="/contact" label="Contact" index={9} />
-
-              <div className="mt-10 flex flex-col gap-3">
-                <a
-                  href={PHONE_HREF}
-                  aria-label="Call Siganext at +91 XXXXX XXXXX"
-                  className="inline-flex items-center justify-center gap-2.5 h-11 px-5 rounded-full border border-signal-teal/40 text-signal-teal hover:bg-signal-teal/10 transition-colors"
-                >
-                  <PhoneIcon className="w-4 h-4" />
-                  <span className="font-mono uppercase text-xs tracking-[0.08em] text-paper">
-                    +91 XXXXX XXXXX
-                  </span>
-                </a>
-                <Link href="/contact" className="btn btn-primary w-full">
-                  Get a Free Quote
+              ))}
+              <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
+                <Link href="/contact" className="btn btn-champagne text-center">
+                  Get a Free Quote →
                 </Link>
               </div>
-            </nav>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
-  );
-}
-
-function MobileLink({
-  href,
-  label,
-  index,
-  small = false,
-}: {
-  href: string;
-  label: string;
-  index: number;
-  small?: boolean;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 14 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.4,
-        delay: 0.04 + index * 0.05,
-        ease: [0.22, 0.61, 0.36, 1],
-      }}
-    >
-      <Link
-        href={href}
-        className={`block font-display ${
-          small ? "text-[1rem]" : "text-[1.75rem]"
-        } font-medium text-paper/90 hover:text-paper transition-colors duration-200`}
-      >
-        {label}
-      </Link>
-    </motion.div>
+    </header>
   );
 }

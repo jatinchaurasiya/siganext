@@ -1,253 +1,161 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import Reveal from "@/components/Reveal";
-import SectionDivider from "@/components/SectionDivider";
+import ConfirmTag from "@/components/ConfirmTag";
+import EnergyCoreWrapper from "@/components/EnergyCoreWrapper";
 
 export const metadata: Metadata = {
-  title: "Government Tender-Ready Vendor – Siganext Maharashtra",
+  title: "Government & Enterprise Tenders | Siganext Networks",
   description:
-    "Single-vendor compliant infrastructure solutions for government tenders, municipal projects, and enterprise networks across Maharashtra and Goa.",
-  alternates: { canonical: "/government-enterprise" },
-  openGraph: {
-    title: "Government Tender-Ready Vendor – Siganext Maharashtra",
-    description:
-      "Tender-ready infrastructure solutions for public sector and enterprise organizations across Maharashtra & Goa.",
-    type: "website",
-  },
+    "Single, compliant corporate vendor for public sector, government & enterprise tenders across broadband network infrastructure, solar energy EPC, and IT software supply.",
 };
 
-const SECTION_10_BULLETS = [
+const COMPLIANCE_ITEMS = [
   {
-    number: "01",
-    title: "Public Sector Tender & RFP Readiness",
-    description:
-      "Fully compliant for government tenders, state infrastructure programs, municipal Wi-Fi/CCTV deployments, and smart city projects across Maharashtra and Goa with complete Bill of Quantities (BoQ) documentation.",
+    title: "Companies Act Registration",
+    desc: "Incorporated entity under the Companies Act, 2013, legally qualified to participate in state & central government tender portals.",
   },
   {
-    number: "02",
-    title: "Single-Point Vendor Accountability",
-    description:
-      "Consolidate power (solar EPC), connectivity (leased lines & fiber drops), IT infrastructure, and CCTV security under one Master Service Agreement (MSA), eliminating multi-vendor coordination friction.",
+    title: "Triple-Vertical Bidding",
+    desc: "Bid on unified turnkey RFPs combining fiber optics, rooftop solar PV, and CCTV/IT infrastructure under one corporate vendor.",
   },
   {
-    number: "03",
-    title: "Audited Field Operations & AMC Capability",
-    description:
-      "Dedicated local engineering dispatch teams headquartered in Nashik, delivering guaranteed 24/7 SLA maintenance, audited field operations, rapid spare parts deployment, and statutory compliance reporting.",
+    title: "Public Sector AMC",
+    desc: "Structured Annual Maintenance Contracts with service level agreements (SLAs) tailored to government administrative facilities.",
   },
 ];
 
 export default function GovernmentEnterprisePage() {
   return (
-    <>
-      {/* ===================== HERO ===================== */}
-      <section className="relative bg-grid-navy text-paper overflow-hidden">
-        {/* Background photo ("Gov hero") */}
+    <div className="bg-bone text-obsidian min-h-screen">
+      {/* HERO */}
+      <section data-section-index="1" className="relative py-28 bg-obsidian text-paper overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img
-            src="/images/gov-hero.png"
-            alt="Siganext Government & Enterprise Infrastructure Planning & Operations Center"
-            className="w-full h-full object-cover object-center opacity-25 filter brightness-85 contrast-105"
+          <Image
+            src="/images/govt_enterprise_hero.png"
+            alt="Modern administrative corporate building"
+            fill
+            priority
+            className="object-cover opacity-30"
           />
-          {/* Heavy grid-navy scrim overlay for maximum text legibility & restraint */}
-          <div
-            aria-hidden
-            className="absolute inset-0 z-[1] bg-gradient-to-b from-grid-navy/90 via-grid-navy/95 to-grid-navy"
-          />
+          <div className="absolute inset-0 bg-gradient-to-b from-obsidian/80 via-obsidian/60 to-obsidian" />
         </div>
 
-        <div className="relative z-10 container-site pt-28 pb-16 md:pt-36 md:pb-24">
-          <Reveal>
-            {/* Breadcrumb */}
-            <nav
-              className="font-mono uppercase text-[11px] tracking-[0.08em] text-paper/60 mb-6 flex items-center gap-2"
-              aria-label="breadcrumb"
-            >
-              <Link href="/" className="hover:text-signal-teal transition-colors">
-                Home
-              </Link>
-              <span className="text-paper/30">/</span>
-              <span className="text-paper/90">Government &amp; Enterprise</span>
-            </nav>
+        <div className="container-site relative z-10 space-y-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-champagne/10 border border-champagne/30 text-champagne font-mono text-xs uppercase tracking-[0.08em]">
+            Public Sector & Corporate Procurement
+          </div>
 
-            <p className="font-mono uppercase text-[11px] tracking-[0.08em] text-marigold-gold mb-4 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-marigold-gold" />
-              GOVERNMENT &amp; ENTERPRISE
-            </p>
+          <h1 className="font-editorial text-4xl sm:text-5xl lg:text-6xl text-paper max-w-4xl leading-[1.15]">
+            A single, compliant vendor for connectivity, power and technology.
+          </h1>
 
-            <h1 className="font-display font-semibold text-paper leading-[1.06] tracking-[-0.02em] text-[clamp(2.25rem,5vw,3.75rem)] max-w-[24ch]">
-              A single, compliant vendor for connectivity, power and technology.
-            </h1>
+          <p className="text-mist text-lg max-w-3xl leading-relaxed">
+            Siganext is registered under the Companies Act, 2013, positioned to bid on corporate, government and public-sector tenders across network infrastructure, solar energy and IT supply.
+          </p>
 
-            {/* Verbatim Section 10 body paragraph */}
-            <p className="mt-6 max-w-[64ch] text-paper/85 text-[1.0625rem] leading-relaxed font-body">
-              Siganext provides integrated infrastructure solutions tailored for public sector tenders, municipal deployments, and enterprise organizations requiring a single accountable vendor for power, connectivity, IT, and security infrastructure.
-            </p>
-
-            <div className="mt-8">
-              <Link
-                href="/contact?service=government-tender"
-                className="btn btn-primary hover:scale-[1.02] transition-transform shadow-md"
-              >
-                Contact for Tender Inquiries →
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-
-        {/* Subdued hair-line accent border */}
-        <div className="h-[1px] bg-paper/10 inset-x-0" />
-      </section>
-
-      {/* ===================== CIN / COMPLIANCE LETTERHEAD STRIP ===================== */}
-      <section className="bg-panel-mist py-8 border-b border-ink/10">
-        <div className="container-site">
-          <Reveal>
-            <div className="bg-white rounded-xl p-6 border border-ink/15 font-mono text-xs text-ink/80 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
-              <div className="flex items-center gap-3 shrink-0">
-                <span className="w-2.5 h-2.5 rounded-sm bg-signal-teal" />
-                <span className="font-bold tracking-[0.08em] uppercase text-ink">
-                  STATUTORY COMPLIANCE &amp; CORPORATE DETAILS
-                </span>
-              </div>
-
-              <div className="grid sm:grid-cols-3 gap-4 md:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-ink/10 text-[11px] uppercase tracking-[0.06em]">
-                <div>
-                  <span className="text-ink/45 block mb-0.5">Corporate Identification (CIN)</span>
-                  <span className="font-semibold text-ink">CIN: [CONFIRM]</span>
-                </div>
-                <div className="sm:pl-4 md:pl-8">
-                  <span className="text-ink/45 block mb-0.5">Registered Office</span>
-                  <span className="font-semibold text-ink">Nashik, Maharashtra [CONFIRM]</span>
-                </div>
-                <div className="sm:pl-4 md:pl-8">
-                  <span className="text-ink/45 block mb-0.5">Incorporation Status</span>
-                  <span className="font-semibold text-ink">Companies Act, 2013</span>
-                </div>
-              </div>
-            </div>
-          </Reveal>
+          <div>
+            <Link href="/contact?service=government-enterprise" className="btn btn-champagne">
+              Contact for Tender Inquiries →
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* ===================== BULLETS (FORMAL NUMBERED LIST) ===================== */}
-      <section className="bg-panel-mist py-16 md:py-24">
-        <div className="container-site">
-          <Reveal>
-            <p className="font-mono uppercase text-[11px] tracking-[0.08em] text-sahyadri-green mb-4">
-              TENDER &amp; ENTERPRISE CAPABILITIES
-            </p>
-            <h2 className="font-display font-semibold text-ink tracking-[-0.02em] text-[clamp(1.75rem,3.5vw,2.5rem)] max-w-[26ch]">
-              Institutional reliability backed by statutory compliance.
+      {/* FORMAL LETTERHEAD COMPLIANCE STRIP */}
+      <section data-section-index="2" className="py-12 bg-white border-y border-obsidian/10">
+        <div className="container-site font-mono text-xs uppercase tracking-[0.08em] space-y-3">
+          <div className="text-champagne font-semibold flex items-center gap-2">
+            <span>OFFICIAL CORPORATE IDENTIFICATION & COMPLIANCE DETAIL</span>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 rounded-2xl bg-bone border border-obsidian/10">
+            <div>
+              <span className="text-mist block text-[10px]">Legal Name:</span>
+              <span className="font-semibold text-obsidian">
+                Siganext Networks and Green Energy Solutions Private Limited
+              </span>
+            </div>
+            <div>
+              <span className="text-mist block text-[10px]">Corporate Identification Number:</span>
+              <ConfirmTag label="CIN Pending" variant="badge" />
+            </div>
+            <div>
+              <span className="text-mist block text-[10px]">Registered Office Address:</span>
+              <ConfirmTag label="Registered Office Address Pending" variant="badge" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* COMPLIANCE & TENDER CAPABILITIES */}
+      <section data-section-index="3" className="py-24 bg-bone">
+        <div className="container-site space-y-16">
+          <div className="max-w-2xl space-y-3">
+            <span className="font-mono text-xs uppercase tracking-[0.08em] text-champagne font-semibold">
+              Institutional Qualification
+            </span>
+            <h2 className="font-editorial text-4xl text-obsidian">
+              Government & Enterprise Procurement Framework
             </h2>
-          </Reveal>
+          </div>
 
-          {/* Clean formal numbered list layout */}
-          <div className="mt-12 space-y-6">
-            {SECTION_10_BULLETS.map((bullet, i) => (
-              <Reveal key={bullet.number} delay={i * 0.08}>
-                <div className="bg-white rounded-xl p-6 sm:p-8 border border-ink/10 shadow-sm flex flex-col md:flex-row md:items-start gap-6 hover:border-ink/25 transition-colors">
-                  <div className="shrink-0">
-                    <span className="font-mono text-2xl font-bold text-signal-teal bg-signal-teal/10 px-3.5 py-1.5 rounded-lg border border-signal-teal/20">
-                      {bullet.number}
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className="font-display font-semibold text-ink text-xl tracking-[-0.01em]">
-                      {bullet.title}
-                    </h3>
-                    <p className="mt-2 text-ink/75 text-[0.95rem] leading-relaxed font-body">
-                      {bullet.description}
-                    </p>
-                  </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {COMPLIANCE_ITEMS.map((item, idx) => (
+              <div key={idx} className="p-8 rounded-2xl bg-white border border-obsidian/10 luxury-card space-y-4">
+                <div className="w-8 h-8 rounded-full bg-champagne/10 text-champagne flex items-center justify-center font-mono text-xs font-bold">
+                  0{idx + 1}
                 </div>
-              </Reveal>
+                <h3 className="font-editorial text-2xl text-obsidian">{item.title}</h3>
+                <p className="text-mist text-sm leading-relaxed">{item.desc}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===================== DOWNLOAD MODULE ===================== */}
-      <section className="bg-panel-mist pb-16 md:pb-24">
-        <div className="container-site">
-          <Reveal>
-            {/*
-              [NOTE: Real company profile PDF must be placed at public/company-profile.pdf before production deployment.]
-            */}
-            <div className="bg-grid-navy text-paper rounded-2xl p-8 md:p-10 border border-paper/10 flex flex-col lg:flex-row lg:items-center justify-between gap-8 shadow-xl">
-              <div className="flex items-start gap-5">
-                <div className="w-14 h-14 rounded-xl bg-signal-teal/15 border border-signal-teal/30 flex items-center justify-center shrink-0 text-signal-teal">
-                  <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                    <polyline points="14 2 14 8 20 8" />
-                    <line x1="16" y1="13" x2="8" y2="13" />
-                    <line x1="16" y1="17" x2="8" y2="17" />
-                    <polyline points="10 9 9 9 8 9" />
-                  </svg>
-                </div>
-                <div>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-signal-teal font-semibold">
-                    FORMAL CREDENTIALS &amp; DECK
-                  </span>
-                  <h3 className="font-display font-semibold text-paper text-2xl tracking-[-0.01em] mt-1">
-                    Siganext Corporate Company Profile
-                  </h3>
-                  <p className="mt-1.5 text-paper/75 text-sm font-body max-w-xl">
-                    Comprehensive overview of statutory registrations, infrastructure assets, past project references, and technical capability specifications.
+      {/* DOWNLOAD MODULE & SIGNATURE 3D OBJECT */}
+      <section data-section-index="4" className="py-24 bg-obsidian text-paper border-t border-champagne/30">
+        <div className="container-site grid lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-7 space-y-6">
+            <span className="font-mono text-xs uppercase tracking-[0.08em] text-champagne font-semibold">
+              Procurement Documentation
+            </span>
+            <h2 className="font-editorial text-4xl text-paper">Download Company Profile</h2>
+            <p className="text-mist text-base leading-relaxed max-w-xl">
+              Access official corporate overview, MOA objects, technical certifications, and tender qualification dossier.
+            </p>
+
+            <div className="p-6 rounded-2xl bg-white/5 border border-champagne/30 space-y-4 max-w-md luxury-card">
+              <div className="flex items-center justify-between">
+                <div className="space-y-1">
+                  <h4 className="font-editorial text-xl text-paper">Siganext Company Profile PDF</h4>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.08em] text-mist">
+                    PDF Document · Corporate Overview
                   </p>
-                  <div className="mt-3 flex items-center gap-3 font-mono text-[11px] text-paper/50">
-                    <span>PDF Document</span>
-                    <span>•</span>
-                    <span>2.4 MB</span>
-                    <span>•</span>
-                    <span>Tender &amp; Procurement Ready</span>
-                  </div>
+                </div>
+                <div className="w-10 h-10 rounded-full bg-champagne/20 border border-champagne/40 flex items-center justify-center text-champagne font-mono text-xs">
+                  PDF
                 </div>
               </div>
 
-              <div className="shrink-0">
-                <a
-                  href="/company-profile.pdf"
-                  download
-                  className="inline-flex items-center justify-center gap-2.5 bg-signal-teal text-grid-navy font-mono uppercase text-xs font-semibold tracking-[0.08em] px-6 py-3.5 rounded-xl hover:bg-[#27a3b0] transition-colors duration-200 shadow-md w-full sm:w-auto"
-                >
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
-                  </svg>
-                  Download Company Profile (PDF)
-                </a>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ===================== CTA BAND ===================== */}
-      <section className="bg-grid-navy text-paper border-t border-paper/10">
-        <div className="container-site py-16 text-center">
-          <Reveal>
-            <p className="font-mono uppercase text-[11px] tracking-[0.08em] text-marigold-gold mb-3">
-              PROCUREMENT &amp; TENDERS
-            </p>
-            <h2 className="font-display font-semibold text-paper tracking-[-0.02em] text-[clamp(1.75rem,3.5vw,2.5rem)] max-w-[24ch] mx-auto">
-              Submitting an RFP or EOI for public infrastructure?
-            </h2>
-            <p className="mt-3 max-w-[54ch] mx-auto text-paper/80 text-[0.98rem] leading-relaxed font-body">
-              Our Nashik government procurement specialists are available to review technical specifications, BoQ requirements, and bid eligibility documents.
-            </p>
-            <div className="mt-8">
-              <Link
-                href="/contact?service=government-tender"
-                className="btn btn-primary font-mono uppercase text-xs font-semibold tracking-[0.08em] px-8 py-3.5 rounded-full hover:scale-105 transition-transform"
+              {/* TODO: Replace placeholder link with real company-profile.pdf before final launch */}
+              <a
+                href="/company-profile.pdf"
+                download
+                className="btn btn-champagne w-full justify-center text-center"
               >
-                Contact for Tender Inquiries →
-              </Link>
+                Download Profile Dossier ↓
+              </a>
+
+              <ConfirmTag label="Official PDF File Pending Upload" variant="badge" />
             </div>
-          </Reveal>
+          </div>
+
+          <div className="lg:col-span-5 flex justify-center">
+            <EnergyCoreWrapper size={240} />
+          </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

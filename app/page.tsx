@@ -1,593 +1,478 @@
+"use client";
+
 import Link from "next/link";
-import type { Metadata } from "next";
-import SectionDivider from "@/components/SectionDivider";
-import HeroScene2D from "@/components/HeroScene2D";
-import Reveal from "@/components/Reveal";
-import HeroEntrance from "@/components/HeroEntrance";
-import HomeFAQ from "@/components/HomeFAQ";
-import Card3DTilt from "@/components/Card3DTilt";
-import MagneticButton from "@/components/MagneticButton";
-import ParticleField from "@/components/ParticleField";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import EnergyCoreWrapper from "@/components/EnergyCoreWrapper";
+import ConfirmTag from "@/components/ConfirmTag";
 
-export const metadata: Metadata = {
-  title: "Siganext | Internet, Solar & IT Solutions – Nashik & Maharashtra",
-  description:
-    "Carrier-grade fiber internet, enterprise rooftop solar, IT hardware & CCTV security, and managed hosting from one Nashik-based operator across Maharashtra & Goa.",
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: "Siganext | Internet, Solar & IT Solutions – Nashik & Maharashtra",
-    description:
-      "Carrier-grade fiber internet, enterprise rooftop solar, IT hardware & CCTV security, and managed hosting from one Nashik-based operator across Maharashtra & Goa.",
-    type: "website",
-  },
-};
-
-const TRUST_ITEMS = [
-  { label: "Registered Private Limited Company", kind: "text" as const },
-  { label: "CIN: [CONFIRM]", kind: "badge" as const },
+const SERVICES_LIST = [
   {
-    label:
-      "Serving Nashik · Mumbai · Thane · Pune · Nagpur · Chhatrapati Sambhajinagar · Goa",
-    kind: "text" as const,
+    num: "01",
+    title: "Internet & Networking",
+    desc: "Carrier-grade fiber optic broadband, leased lines, structured cabling, satellite dish & wireless telecommunication infrastructure built for maximum uptime.",
+    href: "/services/internet-networking",
+    tag: "High-Speed Infrastructure",
   },
-  { label: "Government Tender Eligible", kind: "badge" as const },
-  { label: "One Vendor — Design, Supply, Install, AMC", kind: "text" as const },
+  {
+    num: "02",
+    title: "Solar & Green Energy",
+    desc: "Commercial, industrial, residential & government rooftop solar power EPC — on-grid, off-grid & hybrid systems sized for actual energy consumption.",
+    href: "/services/solar-green-energy",
+    tag: "Clean Power EPC",
+  },
+  {
+    num: "03",
+    title: "IT, Software & Security",
+    desc: "Single-vendor enterprise IT hardware supply, CCTV security surveillance, ERP/automation software, cybersecurity & proactive AMC technical support.",
+    href: "/services/it-software-security",
+    tag: "Unified IT & CCTV",
+  },
+  {
+    num: "04",
+    title: "Data Center & Managed Hosting",
+    desc: "Colocation, cloud infrastructure, NOC monitoring & disaster recovery hosting authorized under company MOA.",
+    href: "/services/data-center-hosting",
+    tag: "Hosting Infrastructure",
+    confirmStatus: "Operational Status Pending",
+  },
 ];
 
-const SERVICES = [
+const WHY_CHOOSE_US = [
   {
-    index: "01",
-    title: "Internet & Networking",
-    blurb:
-      "Broadband, leased lines, structured cabling and enterprise connectivity.",
-    href: "/services/internet-networking",
+    title: "One-Vendor Convenience",
+    desc: "Eliminate vendor sprawl by relying on a single incorporated partner for your broadband network, solar power grid, and office IT security.",
   },
   {
-    index: "02",
-    title: "Solar & Green Energy",
-    blurb:
-      "On-grid, off-grid and hybrid solar, sized to how you actually use power.",
-    href: "/services/solar-green-energy",
+    title: "Local Presence",
+    desc: "Based in Nashik with field engineers operating directly across Maharashtra and Goa for rapid deployment and on-site maintenance.",
   },
   {
-    index: "03",
-    title: "IT, Software & Security",
-    blurb:
-      "Hardware, CCTV, ERP/CRM and cybersecurity, without the vendor sprawl.",
-    href: "/services/it-software-security",
-  },
-  {
-    index: "04",
-    title: "Data Center & Managed Hosting",
-    blurb:
-      "Colocation, cloud infrastructure and disaster recovery.",
-    href: "/services/data-center-hosting",
+    title: "End-to-End Delivery",
+    desc: "Complete lifecycle capability — from technical design & procurement to installation, commissioning, and annual maintenance contracts (AMC).",
   },
 ];
 
 const CITIES = [
-  { name: "Nashik", hook: "Home base — engineering, NOC and operations." },
-  { name: "Mumbai", hook: "Enterprise connectivity and infrastructure." },
-  { name: "Thane", hook: "Residential and SMB solar and broadband." },
-  { name: "Pune", hook: "IT corridors and data centre footprint." },
-  { name: "Nagpur", hook: "Central Maharashtra reach and logistics." },
+  {
+    name: "Nashik",
+    hook: "Headquarters & Primary Field Operations Hub",
+    img: "/images/city_nashik.png",
+  },
+  {
+    name: "Mumbai",
+    hook: "Enterprise Leased Line & Corporate IT Deployments",
+    img: "/images/homepage_hero_solar.png",
+  },
+  {
+    name: "Thane",
+    hook: "Commercial Rooftop Solar & Fiber Infrastructure",
+    img: "/images/internet_hero.png",
+  },
+  {
+    name: "Pune",
+    hook: "Software, ERP & Enterprise Security Solutions",
+    img: "/images/it_security_hero.png",
+  },
+  {
+    name: "Nagpur",
+    hook: "Industrial Solar Installations & Connectivity",
+    img: "/images/datacenter_hero.png",
+  },
   {
     name: "Chhatrapati Sambhajinagar",
-    hook: "Heritage city, modern connectivity.",
+    hook: "Public Sector & Commercial Infrastructure",
+    img: "/images/govt_enterprise_hero.png",
   },
-  { name: "Goa", hook: "Coastal coverage and tourism-sector uptime." },
+  {
+    name: "Goa",
+    hook: "Coastal Hospitality Solar & Fiber Connectivity",
+    img: "/images/homepage_hero_solar.png",
+  },
 ];
 
-const WHY_CHOOSE = [
+const FAQ_ITEMS = [
   {
-    t: "One-vendor convenience",
-    d: "Design, supply, install and maintain — one contract, one SLA, one phone number across all four verticals.",
+    q: "What verticals does Siganext operate across?",
+    a: "Siganext operates across three primary verticals: Internet & Networking (broadband & fiber), Solar & Green Energy (photovoltaic systems), and IT, Software & Security (hardware, CCTV, software), alongside Data Center & Managed Hosting.",
   },
   {
-    t: "Local presence",
-    d: "Nashik-based team on the ground across Maharashtra and Goa — not a remote desk three time zones away.",
+    q: "Where is Siganext headquartered?",
+    a: "Siganext Networks and Green Energy Solutions Private Limited is incorporated and headquartered in Nashik, serving clients across Maharashtra and Goa.",
   },
   {
-    t: "End-to-end delivery",
-    d: "Site survey through AMC, with the seam between connectivity, power and IT engineered rather than negotiated.",
+    q: "Is Siganext eligible for government and corporate tenders?",
+    a: "Yes. Siganext is registered under the Companies Act, 2013, and is structured to bid on public sector, government, and corporate infrastructure tenders.",
   },
 ];
 
 export default function HomePage() {
   return (
-    <>
-      {/* ===================== HERO ===================== */}
-      <section className="relative bg-grid-navy overflow-hidden">
-        {/* circuit-board grid backdrop */}
-        <div
-          aria-hidden
-          className="absolute inset-0 pointer-events-none opacity-[0.10]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(245,247,250,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(245,247,250,0.6) 1px, transparent 1px)",
-            backgroundSize: "48px 48px",
-            maskImage:
-              "radial-gradient(ellipse 70% 70% at 50% 40%, black 35%, transparent 75%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 70% 70% at 50% 40%, black 35%, transparent 75%)",
-          }}
-        />
-
-        {/* 2D Mesh scene — full-bleed backdrop, behind everything */}
-        <HeroScene2D fill />
-
-        {/* foreground scrim so text stays readable over the scene on any width */}
-        <div
-          aria-hidden
-          className="absolute inset-0 z-[2] pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(90deg, rgba(11,18,32,0.92) 0%, rgba(11,18,32,0.7) 45%, rgba(11,18,32,0.35) 75%, transparent 100%)",
-          }}
-        />
-
-        <div className="relative z-10 container-site pt-28 pb-16 md:pt-36 md:pb-28">
-          <HeroEntrance
-            eyebrow="NASHIK-BASED · REGISTERED PRIVATE LIMITED COMPANY · SERVING MAHARASHTRA & GOA"
-            headlineWords={[
-              <span key="0">Connectivity.</span>,
-              <span key="1" className="text-signal-teal">
-                Power.
-              </span>,
-              <span key="2">Technology.</span>,
-            ]}
-            subhead="One provider for broadband & network infrastructure, solar & green energy, and IT, software & security — built for Maharashtra's homes, businesses and government projects."
-            primaryCta={{ label: "Get a Free Consultation", href: "/contact" }}
-            secondaryCta={{ label: "View Our Services", href: "/#services" }}
+    <div className="bg-bone text-obsidian overflow-hidden">
+      {/* 1. HERO WORDMARK TREATMENT */}
+      <section
+        data-section-index="1"
+        className="relative min-h-[92vh] flex flex-col justify-between pt-28 pb-12 bg-obsidian text-paper overflow-hidden"
+      >
+        {/* Background Photograph with Obsidian Overlay */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/homepage_hero_solar.png"
+            alt="Rooftop solar installation in Nashik at dusk"
+            fill
+            priority
+            className="object-cover object-center opacity-40"
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-obsidian/70 via-obsidian/40 to-obsidian" />
         </div>
 
-        {/* bottom convergence trace */}
-        <div
-          aria-hidden
-          className="absolute bottom-0 inset-x-0 h-px z-10"
-          style={{
-            background:
-              "linear-gradient(90deg, transparent, var(--signal-teal), var(--marigold-gold), transparent)",
-            opacity: 0.55,
-          }}
-        />
-      </section>
-
-      {/* ===================== TRUST STRIP ===================== */}
-      <section className="bg-panel-mist border-b border-ink/10 py-5">
-        <div className="container-site">
-          <Reveal
-            as="ul"
-            className="flex flex-wrap items-center justify-between gap-y-3 gap-x-6 lg:gap-x-8 text-ink/75"
-          >
-            {TRUST_ITEMS.map((item, i) => (
-              <li
-                key={i}
-                className="flex items-center gap-2.5 font-mono uppercase text-[10px] md:text-[11px] tracking-[0.08em] shrink-0"
-              >
-                {item.kind === "badge" ? (
-                  <TrustBadge>{item.label}</TrustBadge>
-                ) : (
-                  <>
-                    <DotIcon />
-                    <span>{item.label}</span>
-                  </>
-                )}
-              </li>
-            ))}
-          </Reveal>
+        {/* Oversized Bleed Wordmark */}
+        <div className="relative z-10 w-full overflow-hidden select-none pointer-events-none -mt-4">
+          <h1 className="font-display font-extrabold text-[18vw] leading-[0.8] tracking-[-0.04em] text-paper/10 text-center uppercase whitespace-nowrap">
+            SIGANEXT
+          </h1>
         </div>
-      </section>
 
-      {/* ===================== ABOUT PREVIEW ===================== */}
-      <SectionDivider color="#2FB8C6" />
+        {/* Floating Pill Badges & Hero Content */}
+        <div className="container-site relative z-20 my-auto grid lg:grid-cols-12 gap-8 items-end">
+          <div className="lg:col-span-8 space-y-6">
+            {/* Floating Badges */}
+            <div className="flex flex-wrap gap-2.5">
+              <div className="px-3.5 py-1.5 rounded-full bg-obsidian/80 backdrop-blur-md border border-champagne/40 text-champagne font-mono text-[11px] uppercase tracking-[0.08em]">
+                Registered Private Limited Company
+              </div>
+              <div className="px-3.5 py-1.5 rounded-full bg-obsidian/80 backdrop-blur-md border border-champagne/40 text-champagne font-mono text-[11px] uppercase tracking-[0.08em]">
+                Govt Tender Eligible
+              </div>
+              <div className="px-3.5 py-1.5 rounded-full bg-obsidian/80 backdrop-blur-md border border-white/20 text-mist font-mono text-[11px] uppercase tracking-[0.08em]">
+                Nashik-Based · Serving Maharashtra & Goa
+              </div>
+            </div>
 
-      <section className="bg-panel-mist">
-        <div className="container-site py-16 md:py-24 grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
-          <Reveal>
-            <p className="font-mono uppercase text-[11px] tracking-[0.08em] text-sahyadri-green mb-4">
-              About Siganext
-            </p>
-            <h2 className="font-display font-semibold text-ink tracking-[-0.02em] text-[clamp(1.6rem,3.2vw,2.5rem)] leading-[1.1] max-w-[24ch]">
-              Sustainable power, reliable connectivity, and smart technology —
-              from one Nashik-based team.
+            <h2 className="font-editorial text-4xl sm:text-5xl lg:text-6xl text-paper leading-[1.1]">
+              Connectivity. Power. <br />
+              <span className="text-champagne font-normal italic">Technology.</span>
             </h2>
-            <div className="mt-6 space-y-4 text-ink/75 text-[1.0625rem] leading-relaxed max-w-[52ch]">
-              <p>
-                Siganext Networks and Green Energy Solutions Private Limited is a
-                Nashik-based company built around one premise: connectivity, solar
-                and IT are not three businesses glued together — they are one
-                system, and the operator that treats them that way builds better
-                infrastructure.
-              </p>
-              <p>
-                We hold all four verticals under one MOA, one SLA, and one
-                engineering culture — so the seam between power, signal and data
-                is designed, not negotiated across vendors.
+
+            <p className="text-mist text-base sm:text-lg max-w-2xl leading-relaxed">
+              One provider for broadband & network infrastructure, solar & green energy, and IT, software & security — built for Maharashtra's homes, businesses and government projects.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <Link href="/contact" className="btn btn-champagne">
+                Get a Free Consultation →
+              </Link>
+              <Link href="#verticals" className="btn btn-ghost">
+                View Our Services
+              </Link>
+            </div>
+          </div>
+
+          {/* Corner Signature 3D Energy Core Object */}
+          <div className="lg:col-span-4 flex justify-end">
+            <div className="relative">
+              <EnergyCoreWrapper size={220} />
+              <div className="text-center font-mono text-[10px] uppercase tracking-[0.08em] text-mist/60 mt-2">
+                Unified Infrastructure Core
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. TRUST STRIP */}
+      <section className="bg-obsidian border-y border-champagne/20 py-4 text-paper/80 font-mono text-xs uppercase tracking-[0.08em] overflow-x-auto">
+        <div className="container-site flex items-center justify-between gap-6 whitespace-nowrap">
+          <span>Registered Private Limited Company</span>
+          <span className="text-champagne">•</span>
+          <span className="flex items-center gap-1.5">
+            CIN: <ConfirmTag label="CIN Pending" variant="inline" />
+          </span>
+          <span className="text-champagne">•</span>
+          <span>Government Tender Eligible</span>
+          <span className="text-champagne">•</span>
+          <span>One Vendor — Design, Supply, Install, AMC</span>
+        </div>
+      </section>
+
+      {/* 3. ABOUT PREVIEW */}
+      <section data-section-index="2" className="py-24 bg-bone">
+        <div className="container-site grid lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-5 space-y-6">
+            <span className="font-mono text-xs uppercase tracking-[0.08em] text-champagne font-semibold">
+              Unified Capability
+            </span>
+            <h2 className="font-editorial text-3xl sm:text-4xl text-obsidian leading-snug">
+              Sustainable power, reliable connectivity, and smart technology — from one team.
+            </h2>
+            <p className="text-mist text-base leading-relaxed">
+              Siganext Networks and Green Energy Solutions Private Limited brings three essential services under one roof. Instead of coordinating separate vendors for your broadband, rooftop solar, and office IT, Siganext designs, supplies, installs and maintains all three.
+            </p>
+            <div>
+              <Link href="/about" className="btn btn-obsidian">
+                Read About Siganext →
+              </Link>
+            </div>
+          </div>
+
+          <div className="lg:col-span-7 grid sm:grid-cols-2 gap-4">
+            <div className="p-6 rounded-2xl bg-white/60 border border-obsidian/10 luxury-card space-y-2">
+              <h3 className="font-mono text-sm uppercase tracking-[0.08em] text-obsidian font-semibold">
+                Certified Engineers
+              </h3>
+              <p className="text-xs text-mist leading-relaxed">
+                Qualified technical personnel managing network cabling, PV electrical setups, and security hardware.
               </p>
             </div>
-            <Link
-              href="/about"
-              className="inline-flex items-center mt-7 font-mono uppercase text-[11px] tracking-[0.08em] text-signal-teal hover:text-ink transition-colors duration-200 group"
-            >
-              Learn more about us
-              <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">
-                →
-              </span>
-            </Link>
-          </Reveal>
+            <div className="p-6 rounded-2xl bg-white/60 border border-obsidian/10 luxury-card space-y-2">
+              <h3 className="font-mono text-sm uppercase tracking-[0.08em] text-obsidian font-semibold">
+                Govt Tender Ready
+              </h3>
+              <p className="text-xs text-mist leading-relaxed">
+                Incorporated legal entity structured for public sector and municipal infrastructure procurement.
+              </p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white/60 border border-obsidian/10 luxury-card space-y-2">
+              <h3 className="font-mono text-sm uppercase tracking-[0.08em] text-obsidian font-semibold">
+                End-to-End AMC
+              </h3>
+              <p className="text-xs text-mist leading-relaxed">
+                Long-term service agreements ensuring long-term maintenance of fiber, solar assets, and IT systems.
+              </p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white/60 border border-obsidian/10 luxury-card space-y-2">
+              <h3 className="font-mono text-sm uppercase tracking-[0.08em] text-obsidian font-semibold">
+                Local Presence
+              </h3>
+              <p className="text-xs text-mist leading-relaxed">
+                Headquartered in Nashik with responsive field operations across Maharashtra & Goa.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-          {/* photo with marigold corner accent */}
-          <Reveal delay={0.1}>
-            <div className="relative aspect-[4/3] w-full max-w-lg mx-auto lg:max-w-none">
-              {/* marigold-gold offset corner accent shape */}
-              <div
-                aria-hidden
-                className="absolute -right-3 -bottom-3 w-2/3 h-2/3 rounded-xl bg-marigold-gold z-0 shadow-md"
-              />
-              <div className="relative z-10 w-full h-full rounded-xl overflow-hidden bg-grid-navy ring-1 ring-ink/10 shadow-2xl group">
-                <img
-                  src="/images/about-rooftop-engineer.jpg"
-                  alt="Siganext Rooftop Field Engineer inspecting solar & microwave infrastructure"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-grid-navy/80 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-grid-navy/80 backdrop-blur-sm p-3 rounded-lg border border-signal-teal/30">
+      {/* 4. SERVICES OVERVIEW — 4-ITEM NUMBERED LIST */}
+      <section id="verticals" data-section-index="3" className="py-24 bg-obsidian text-paper">
+        <div className="container-site space-y-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="space-y-3">
+              <span className="font-mono text-xs uppercase tracking-[0.08em] text-champagne font-semibold">
+                Core Verticals
+              </span>
+              <h2 className="font-editorial text-4xl sm:text-5xl text-paper">
+                Four Pillars of Modern Infrastructure
+              </h2>
+            </div>
+            <p className="text-mist text-sm max-w-md">
+              Explore our core business verticals designed for residential, commercial, enterprise, and government clients.
+            </p>
+          </div>
+
+          <div className="divide-y divide-white/10 border-y border-white/10">
+            {SERVICES_LIST.map((srv) => (
+              <div key={srv.num} className="py-10 grid md:grid-cols-12 gap-6 items-center group luxury-card">
+                <div className="md:col-span-2 font-display text-4xl text-champagne font-extrabold">
+                  {srv.num}
+                </div>
+                <div className="md:col-span-4 space-y-2">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-signal-teal animate-pulse" />
-                    <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-paper/90">
-                      Nashik Base · Field Operations
+                    <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-champagne">
+                      {srv.tag}
                     </span>
+                    {srv.confirmStatus && (
+                      <ConfirmTag label={srv.confirmStatus} variant="badge" />
+                    )}
                   </div>
-                  <span className="font-mono text-[9px] uppercase tracking-wider text-marigold-gold border border-marigold-gold/40 px-2 py-0.5 rounded">
-                    Certified SLA
-                  </span>
+                  <h3 className="text-2xl font-editorial text-paper group-hover:text-champagne transition-colors">
+                    {srv.title}
+                  </h3>
+                </div>
+                <div className="md:col-span-4 text-mist text-sm leading-relaxed">
+                  {srv.desc}
+                </div>
+                <div className="md:col-span-2 flex justify-start md:justify-end">
+                  <Link
+                    href={srv.href}
+                    className="font-mono text-xs uppercase tracking-[0.08em] text-champagne group-hover:underline flex items-center gap-1"
+                  >
+                    Explore Vertical →
+                  </Link>
                 </div>
               </div>
-              {/* signal trace corner */}
-              <svg
-                aria-hidden
-                className="absolute left-4 top-6 w-16 h-16 hidden md:block"
-                viewBox="0 0 64 64"
-                fill="none"
-              >
-                <path
-                  d="M2,32 H18 L24,16 L34,48 L40,32 H62"
-                  stroke="#2FB8C6"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ===================== SERVICES OVERVIEW ===================== */}
-      <SectionDivider color="#E8A33D" />
-
-      <section id="services" className="bg-panel-mist">
-        <div className="container-site py-16 md:py-24">
-          <Reveal>
-            <p className="font-mono uppercase text-[11px] tracking-[0.08em] text-signal-teal mb-4">
-              The four verticals
-            </p>
-            <h2 className="font-display font-semibold text-ink tracking-[-0.02em] text-[clamp(1.75rem,3.5vw,2.75rem)] max-w-[20ch]">
-              One provider. Four connected capabilities.
-            </h2>
-          </Reveal>
-
-          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {SERVICES.map((s, i) => (
-              <Reveal key={s.index} delay={i * 0.05}>
-                <ServiceCard {...s} />
-              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===================== GOVERNMENT & ENTERPRISE TEASER ===================== */}
-      <section className="bg-grid-navy text-paper relative overflow-hidden">
-        <ParticleField particleCount={35} lineColor="232, 163, 61" dotColor="47, 184, 198" />
-        <div
-          aria-hidden
-          className="absolute inset-0 pointer-events-none opacity-[0.08]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(232,163,61,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(232,163,61,0.6) 1px, transparent 1px)",
-            backgroundSize: "56px 56px",
-            maskImage:
-              "radial-gradient(ellipse 60% 80% at 80% 50%, black 35%, transparent 75%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 60% 80% at 80% 50%, black 35%, transparent 75%)",
-          }}
-        />
-        <Reveal className="relative z-10 container-site py-16 md:py-24 grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-center">
-          <div>
-            <p className="font-mono uppercase text-[11px] tracking-[0.08em] text-marigold-gold mb-4">
-              Government & Enterprise
-            </p>
-            <h2 className="font-display font-semibold text-paper tracking-[-0.02em] text-[clamp(1.6rem,3.4vw,2.5rem)] leading-[1.1] max-w-[22ch]">
+      {/* 5. GOVERNMENT & ENTERPRISE TEASER BAND */}
+      <section data-section-index="4" className="py-20 bg-obsidian text-paper border-t border-champagne/20">
+        <div className="container-site grid lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-8 space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-champagne/10 border border-champagne/30 text-champagne font-mono text-xs uppercase tracking-[0.08em]">
+              Public Sector & Tender Bidding
+            </div>
+            <h2 className="font-editorial text-3xl sm:text-4xl text-paper">
               A single, compliant vendor for connectivity, power and technology.
             </h2>
-            <p className="mt-5 max-w-[48ch] text-paper/75 text-[1rem] leading-relaxed">
-              One MOA, one BoQ, one accountability across all four verticals —
-              engineered for departments, PSUs and enterprises that need three
-              vendors reconciled into one operator.
+            <p className="text-mist text-base max-w-2xl leading-relaxed">
+              Positioned to bid on corporate, government, and municipal tenders across network infrastructure, solar energy, and IT supply under the Companies Act, 2013.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row lg:flex-col gap-3 lg:items-start">
-            <MagneticButton href="/government-enterprise" className="btn btn-primary shadow-xl hover:shadow-marigold-gold/20">
-              Download Company Profile
-            </MagneticButton>
-            <MagneticButton href="/government-enterprise" className="btn btn-ghost border border-paper/20">
-              Contact for Tender Inquiries
-            </MagneticButton>
-          </div>
-        </Reveal>
-      </section>
-
-      {/* ===================== WHY CHOOSE US ===================== */}
-      <section className="bg-panel-mist">
-        <div className="container-site py-16 md:py-24">
-          <Reveal>
-            <p className="font-mono uppercase text-[11px] tracking-[0.08em] text-sahyadri-green mb-4">
-              Why Siganext
-            </p>
-            <h2 className="font-display font-semibold text-ink tracking-[-0.02em] text-[clamp(1.6rem,3.2vw,2.5rem)]">
-              The operator who owns the seam.
-            </h2>
-          </Reveal>
-
-          <div className="mt-10 grid md:grid-cols-3 gap-5">
-            {WHY_CHOOSE.map((w, i) => (
-              <Reveal key={w.t} delay={i * 0.05}>
-                <Card3DTilt maxTilt={8} scale={1.02} className="h-full rounded-xl">
-                  <div className="bg-white rounded-xl p-6 md:p-7 border border-ink/10 h-full shadow-sm">
-                    <span className="font-mono uppercase text-[11px] tracking-[0.08em] text-signal-teal">
-                      0{i + 1}
-                    </span>
-                    <h3 className="font-display font-semibold text-ink text-[1.25rem] tracking-[-0.01em] mt-3">
-                      {w.t}
-                    </h3>
-                    <p className="mt-3 text-ink/70 text-[0.97rem] leading-relaxed font-body">
-                      {w.d}
-                    </p>
-                  </div>
-                </Card3DTilt>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* honest compliance note — no fabricated 4th stat */}
-          <Reveal delay={0.1}>
-            <p className="mt-8 font-mono uppercase text-[10px] tracking-[0.08em] text-ink/45 max-w-[70ch]">
-              Note · operational figures (years operating, project count, MW
-              installed) will be listed publicly once verified. We do not
-              publish unverified statistics.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ===================== LOCAL COVERAGE ===================== */}
-      <SectionDivider color="#1F6E4A" />
-
-      <section className="bg-panel-mist">
-        <div className="container-site py-16 md:py-24">
-          <Reveal>
-            <p className="font-mono uppercase text-[11px] tracking-[0.08em] text-signal-teal mb-4">
-              Coverage
-            </p>
-            <h2 className="font-display font-semibold text-ink tracking-[-0.02em] text-[clamp(1.6rem,3.2vw,2.5rem)] max-w-[24ch]">
-              Serving Nashik and expanding across Maharashtra & Goa.
-            </h2>
-          </Reveal>
-
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {CITIES.map((c, i) => (
-              <Reveal
-                key={c.name}
-                delay={i * 0.04}
-                className={i === 0 ? "col-span-2 md:col-span-1 lg:col-span-1" : ""}
-              >
-                <Card3DTilt maxTilt={10} scale={1.03} className="h-full rounded-xl">
-                  <CityTile name={c.name} hook={c.hook} featured={i === 0} />
-                </Card3DTilt>
-              </Reveal>
-            ))}
-            {/* 8th tile: filler / outlook */}
-            <Reveal delay={0.28}>
-              <div
-                className="rounded-xl border border-dashed border-signal-teal/40 h-full min-h-[220px] grid place-items-center p-6 text-center"
-                style={{ background: "rgba(47,184,198,0.05)" }}
-              >
-                <p className="font-mono uppercase text-[11px] tracking-[0.08em] text-ink/55 max-w-[24ch]">
-                  Expanding to additional Maharashtra & Goa districts —
-                  contact us for your location.
-                </p>
-              </div>
-            </Reveal>
+          <div className="lg:col-span-4 flex lg:justify-end">
+            <Link href="/government-enterprise" className="btn btn-champagne">
+              Government & Enterprise Hub →
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* ===================== HOME FAQ SECTION ===================== */}
-      <HomeFAQ />
-
-      {/* ===================== FINAL CTA BAND ===================== */}
-      <section className="bg-marigold-gold text-grid-navy relative overflow-hidden">
-        <div className="container-site py-16 md:py-20 text-center relative z-10">
-          <Reveal>
-            <p className="font-mono uppercase text-[11px] tracking-[0.08em] text-grid-navy/65 mb-4">
-              Start with a conversation
-            </p>
-            <h2 className="font-display font-semibold text-grid-navy tracking-[-0.02em] text-[clamp(1.75rem,4vw,3rem)]">
-              Let&rsquo;s talk about your project.
-            </h2>
-            <div className="mt-8 flex justify-center">
-              <MagneticButton
-                href="/contact"
-                className="inline-flex items-center bg-grid-navy text-paper font-mono uppercase text-xs font-semibold tracking-[0.08em] px-7 py-4 rounded-full hover:bg-ink transition-colors duration-200 shadow-xl"
-              >
-                Contact Siganext
-              </MagneticButton>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-    </>
-  );
-}
-
-// ---------------------------------------------------------------------------
-
-function DotIcon() {
-  return (
-    <span
-      aria-hidden
-      className="inline-block w-1.5 h-1.5 rounded-full bg-signal-teal shrink-0"
-    />
-  );
-}
-
-function ServiceCard({
-  index,
-  title,
-  blurb,
-  href,
-}: {
-  index: string;
-  title: string;
-  blurb: string;
-  href: string;
-}) {
-  return (
-    <Card3DTilt maxTilt={10} scale={1.03} className="h-full">
-      {/* Outer Shell - Doppelrand Architecture */}
-      <div className="p-2 rounded-[1.75rem] bg-gradient-to-b from-white/80 to-white/40 border border-black/5 shadow-lg h-full">
-        {/* Inner Core */}
-        <Link
-          href={href}
-          className="group relative block bg-white rounded-[calc(1.75rem-0.5rem)] p-6 md:p-7 shadow-[inset_0_1px_2px_rgba(255,255,255,1)] hover:shadow-2xl hover:border-signal-teal/40 transition-all duration-300 overflow-hidden h-full flex flex-col justify-between"
-        >
-          {/* hover trace line — animated top border */}
-          <span
-            aria-hidden
-            className="absolute left-0 top-0 h-[3px] w-0 bg-gradient-to-r from-signal-teal to-marigold-gold group-hover:w-full transition-all duration-500 ease-out"
-          />
-          <div>
-            <div className="flex items-center justify-between">
-              <span className="font-mono font-bold text-xs tracking-[0.15em] text-signal-teal/80 group-hover:text-marigold-gold transition-colors duration-200">
-                // {index}
-              </span>
-              <span className="w-7 h-7 rounded-full bg-signal-teal/10 flex items-center justify-center font-mono text-xs text-signal-teal group-hover:bg-signal-teal group-hover:text-paper group-hover:translate-x-1 group-hover:-translate-y-[1px] transition-all duration-300">
-                ↗
-              </span>
-            </div>
-            <h3 className="font-display font-bold text-ink text-[1.3rem] tracking-[-0.01em] mt-4 leading-tight group-hover:text-signal-teal transition-colors duration-200">
-              {title}
-            </h3>
-            <p className="mt-3 text-ink/75 text-[0.93rem] leading-relaxed font-sans">{blurb}</p>
-          </div>
-          <div className="mt-6 pt-4 border-t border-ink/5 flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-signal-teal/80">
-            <span>Explore Solution</span>
-            <span>→</span>
-          </div>
-        </Link>
-      </div>
-    </Card3DTilt>
-  );
-}
-
-// Inline badge chip — used to visually distinguish trust-strip items like CIN.
-function TrustBadge({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="inline-flex items-center gap-1.5 bg-signal-teal/15 text-signal-teal border border-signal-teal/30 rounded-full px-3 py-1 font-mono uppercase text-[10px] tracking-[0.1em] shadow-sm">
-      {children}
-    </span>
-  );
-}
-
-function CityTile({
-  name,
-  hook,
-  featured = false,
-}: {
-  name: string;
-  hook: string;
-  featured?: boolean;
-}) {
-  return (
-    /* Outer Shell */
-    <div className={`p-1.5 rounded-[1.5rem] ${featured ? "bg-gradient-to-b from-marigold-gold/30 to-signal-teal/20 border border-marigold-gold/40" : "bg-white/10 border border-white/10"} h-full`}>
-      {/* Inner Core */}
-      <div
-        className={`group relative overflow-hidden rounded-[calc(1.5rem-0.375rem)] h-full min-h-[200px] sm:min-h-[220px] ${
-          featured ? "md:min-h-[260px]" : ""
-        }`}
-        style={{
-          background: featured
-            ? "linear-gradient(135deg, #13203a 0%, #0B1220 70%, #07101e 100%)"
-            : "linear-gradient(135deg, #1a2440 0%, #0B1220 80%)",
-        }}
-      >
-        {/* faint grid — circuit-board metaphor */}
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-[0.14] group-hover:opacity-[0.25] transition-opacity duration-500"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(47,184,198,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(47,184,198,0.6) 1px, transparent 1px)",
-            backgroundSize: "24px 24px",
-          }}
-        />
-        {/* brand glow */}
-        <div
-          aria-hidden
-          className="absolute inset-0 transition-opacity duration-500"
-          style={{
-            background:
-              "radial-gradient(60% 60% at 70% 30%, rgba(47,184,198,0.18), transparent 65%)",
-          }}
-        />
-        {/* zoom-on-hover overlay */}
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out"
-          style={{
-            background:
-              "radial-gradient(80% 80% at 50% 40%, rgba(232,163,61,0.18), transparent 70%)",
-          }}
-        />
-        <div className="relative h-full p-5 sm:p-6 flex flex-col justify-end">
-          <div className="flex items-center gap-2 mb-2">
-            <span
-              aria-hidden
-              className="inline-block w-2 h-2 rounded-full shrink-0 animate-pulse"
-              style={{
-                background: featured ? "var(--marigold-gold)" : "var(--signal-teal)",
-              }}
-            />
-            <span className="font-mono uppercase text-[9px] sm:text-[10px] tracking-[0.1em] text-paper/60 truncate">
-              {featured ? "Headquarters NOC" : "Carrier Coverage"}
+      {/* 6. WHY CHOOSE US — EXACTLY 3 CARDS ONLY */}
+      <section data-section-index="5" className="py-24 bg-bone">
+        <div className="container-site space-y-16">
+          <div className="text-center max-w-2xl mx-auto space-y-4">
+            <span className="font-mono text-xs uppercase tracking-[0.08em] text-champagne font-semibold">
+              Operational Value
             </span>
+            <h2 className="font-editorial text-4xl text-obsidian">
+              Why Partner With Siganext
+            </h2>
           </div>
-          <h3
-            className={`font-display font-bold text-paper tracking-[-0.01em] break-words ${
-              featured ? "text-[1.4rem] sm:text-[1.6rem]" : "text-[1.15rem] sm:text-[1.3rem]"
-            }`}
-          >
-            {name}
-          </h3>
-          <p className="mt-1.5 text-paper/70 text-[0.82rem] sm:text-[0.88rem] leading-relaxed">
-            {hook}
-          </p>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {WHY_CHOOSE_US.map((item, idx) => (
+              <div
+                key={idx}
+                className="p-8 rounded-2xl bg-white border border-obsidian/10 luxury-card space-y-4"
+              >
+                <div className="w-10 h-10 rounded-full bg-champagne/10 border border-champagne/30 flex items-center justify-center text-champagne font-mono font-bold text-sm">
+                  0{idx + 1}
+                </div>
+                <h3 className="font-editorial text-2xl text-obsidian">{item.title}</h3>
+                <p className="text-mist text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* 7. LOCAL COVERAGE — 7 CITY TILES */}
+      <section data-section-index="6" className="py-24 bg-obsidian text-paper">
+        <div className="container-site space-y-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="space-y-3">
+              <span className="font-mono text-xs uppercase tracking-[0.08em] text-champagne font-semibold">
+                Regional Reach
+              </span>
+              <h2 className="font-editorial text-4xl sm:text-5xl text-paper">
+                Serving Maharashtra & Goa
+              </h2>
+            </div>
+            <p className="text-mist text-sm max-w-md">
+              Field deployment coverage across key municipal corporations and commercial centers.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {CITIES.map((city, idx) => (
+              <div
+                key={idx}
+                className="group relative rounded-2xl overflow-hidden bg-obsidian/80 border border-white/10 luxury-card flex flex-col justify-between p-6 min-h-[220px]"
+              >
+                <div className="absolute inset-0 z-0">
+                  <Image
+                    src={city.img}
+                    alt={`${city.name} connectivity and solar coverage`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover opacity-25 group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/60 to-transparent" />
+                </div>
+
+                <div className="relative z-10 font-mono text-[10px] uppercase tracking-[0.08em] text-champagne">
+                  Region 0{idx + 1}
+                </div>
+
+                <div className="relative z-10 space-y-1 mt-auto">
+                  <h3 className="font-editorial text-2xl text-paper group-hover:text-champagne transition-colors">
+                    {city.name}
+                  </h3>
+                  <p className="text-xs text-mist">{city.hook}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ SECTION WITH JSON-LD SCHEMA */}
+      <section className="py-20 bg-bone border-t border-obsidian/10">
+        <div className="container-site max-w-3xl space-y-12">
+          <div className="text-center space-y-3">
+            <span className="font-mono text-xs uppercase tracking-[0.08em] text-champagne font-semibold">
+              Frequently Asked Questions
+            </span>
+            <h2 className="font-editorial text-3xl text-obsidian">Common Inquiries</h2>
+          </div>
+
+          <div className="space-y-6">
+            {FAQ_ITEMS.map((faq, idx) => (
+              <div key={idx} className="p-6 rounded-2xl bg-white border border-obsidian/10 space-y-2">
+                <h3 className="font-editorial text-xl text-obsidian">{faq.q}</h3>
+                <p className="text-mist text-sm leading-relaxed">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": FAQ_ITEMS.map((item) => ({
+                "@type": "Question",
+                "name": item.q,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": item.a,
+                },
+              })),
+            }),
+          }}
+        />
+      </section>
+
+      {/* 8. FINAL CTA BAND WITH SIGNATURE 3D OBJECT */}
+      <section className="py-24 bg-obsidian text-paper relative overflow-hidden border-t border-champagne/30">
+        <div className="container-site relative z-10 grid lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-8 space-y-6">
+            <span className="font-mono text-xs uppercase tracking-[0.08em] text-champagne font-semibold">
+              Initiate Engagement
+            </span>
+            <h2 className="font-editorial text-4xl sm:text-5xl text-paper">
+              Ready to Upgrade Your Network, Power, or IT?
+            </h2>
+            <p className="text-mist text-base max-w-xl">
+              Consult with our technical engineers for broadband site surveys, solar energy assessments, or enterprise IT security procurement.
+            </p>
+            <div className="flex flex-wrap gap-4 pt-2">
+              <Link href="/contact" className="btn btn-champagne">
+                Get a Free Consultation →
+              </Link>
+              <a href="https://wa.me/910000000000" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+                WhatsApp Chat
+              </a>
+            </div>
+          </div>
+
+          <div className="lg:col-span-4 flex justify-center lg:justify-end">
+            <EnergyCoreWrapper size={240} />
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

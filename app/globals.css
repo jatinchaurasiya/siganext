@@ -1,68 +1,67 @@
 @import "tailwindcss";
 
 /* =========================================================================
-   Siganext — Design Tokens
-   Tailwind v4 CSS-first config. Tokens are declared as raw CSS variables
-   under :root, then surfaced to Tailwind utilities via @theme inline so that
-   utilities like `bg-grid-navy`, `text-signal-teal`, `font-display` work.
+   Siganext — "Obsidian & Champagne" Design Tokens
+   Tailwind CSS-first config.
    ========================================================================= */
 
 :root {
-  /* color */
-  --grid-navy:      #0B1220;
-  --panel-mist:     #EDEFEA;
-  --signal-teal:    #2FB8C6;
-  --marigold-gold:  #E8A33D;
-  --sahyadri-green: #1F6E4A;
-  --ink:            #10151F;
-  --paper:          #F5F7FA;
+  /* Core Palette */
+  --bone:      #F3F1EA; /* Base light — warm ivory */
+  --obsidian:  #101012; /* Base dark — near-black */
+  --champagne: #C9A24B; /* The one accent — muted antique brass/gold */
+  --moss:      #33442A; /* Whisper accent — icon fills, hairline dividers */
+  --mist:      #A39D8E; /* Secondary text, captions, borders */
+  --paper:     #F3F1EA; /* Text on dark backgrounds — warm ivory */
 
-  /* semantic aliases */
-  --bg-dark:        var(--grid-navy);
-  --bg-light:       var(--panel-mist);
+  /* Legacy Backward-Compatibility Mapping */
+  --grid-navy:      var(--obsidian);
+  --panel-mist:     var(--bone);
+  --signal-teal:    var(--champagne);
+  --marigold-gold:  var(--champagne);
+  --sahyadri-green: var(--moss);
+  --ink:            var(--obsidian);
+
+  /* Semantic Aliases */
+  --bg-dark:        var(--obsidian);
+  --bg-light:       var(--bone);
   --text-on-dark:   var(--paper);
-  --text-on-light:  var(--ink);
-  --accent-primary: var(--signal-teal);
-  --accent-solar:   var(--marigold-gold);
-  --accent-earth:   var(--sahyadri-green);
+  --text-on-light:  var(--obsidian);
+  --accent-primary: var(--champagne);
 
-  /* motion */
+  /* Motion & Typography */
   --tracking-display: -0.02em;
   --tracking-mono:    0.08em;
   --ease-quiet: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-/* Expose tokens to Tailwind. Colors become `bg-*`, `text-*`, `border-*` etc.
-   Fonts become `font-display`, `font-body`, `font-mono`. */
 @theme inline {
-  --color-grid-navy:      var(--grid-navy);
-  --color-panel-mist:     var(--panel-mist);
-  --color-signal-teal:    var(--signal-teal);
-  --color-marigold-gold:  var(--marigold-gold);
-  --color-sahyadri-green: var(--sahyadri-green);
-  --color-ink:            var(--ink);
-  --color-paper:          var(--paper);
+  --color-bone:      var(--bone);
+  --color-obsidian:  var(--obsidian);
+  --color-champagne: var(--champagne);
+  --color-moss:      var(--moss);
+  --color-mist:      var(--mist);
+  --color-paper:     var(--paper);
 
-  --color-bg-dark:        var(--bg-dark);
-  --color-bg-light:       var(--bg-light);
-  --color-text-on-dark:   var(--text-on-dark);
-  --color-text-on-light:  var(--text-on-light);
-  --color-accent-primary: var(--accent-primary);
-  --color-accent-solar:   var(--accent-solar);
-  --color-accent-earth:   var(--accent-earth);
+  /* Alias maps */
+  --color-grid-navy:      var(--obsidian);
+  --color-panel-mist:     var(--bone);
+  --color-signal-teal:    var(--champagne);
+  --color-marigold-gold:  var(--champagne);
+  --color-sahyadri-green: var(--moss);
+  --color-ink:            var(--obsidian);
 
-  --font-display: var(--font-display);
-  --font-body:    var(--font-body);
-  --font-mono:    var(--font-mono);
+  --font-display:   var(--font-display);
+  --font-editorial: var(--font-editorial);
+  --font-body:      var(--font-body);
+  --font-mono:      var(--font-mono);
 }
 
 body {
-  background: var(--bg-light);
-  color: var(--text-on-light);
+  background: var(--bone);
+  color: var(--obsidian);
   font-family: var(--font-body), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  /* eliminate horizontal scrollbar / white block on the right caused by
-     absolutely-positioned hero accents and the 3D scene backdrop. */
   overflow-x: hidden;
 }
 
@@ -71,79 +70,104 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Shared section container — single source of truth for structural alignment.
-   Usage: <div className="container-site">...</div> */
 .container-site {
   width: 100%;
-  max-width: 80rem; /* 7xl = 1280px */
+  max-width: 80rem; /* 1280px */
   margin-inline: auto;
-  padding-inline: 1rem;    /* px-4 */
+  padding-inline: 1rem;
 }
-@media (min-width: 640px)  { .container-site { padding-inline: 1.5rem; } } /* sm: px-6 */
-@media (min-width: 1024px) { .container-site { padding-inline: 2rem;  } } /* lg: px-8 */
+@media (min-width: 640px)  { .container-site { padding-inline: 1.5rem; } }
+@media (min-width: 1024px) { .container-site { padding-inline: 2rem;  } }
 
-/* Shared button system — primary solid accent, secondary ghost outline. */
+/* Editorial Typography */
+.font-editorial {
+  font-family: var(--font-editorial), serif;
+}
+
+/* Compliance Guardrail - Visible [CONFIRM] Badge & Text */
+.confirm-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  background-color: rgba(201, 162, 75, 0.12);
+  border: 1px dashed rgba(201, 162, 75, 0.6);
+  color: var(--champagne);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.confirm-text {
+  border-bottom: 1.5px dashed var(--champagne);
+  color: var(--champagne);
+}
+
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-mono);
-  font-size: 0.75rem;          /* text-xs */
-  font-weight: 600;             /* font-semibold */
+  font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 0.75rem 1.25rem;     /* px-5 py-3 */
+  padding: 0.75rem 1.375rem;
   border-radius: 9999px;
-  transition: background-color 0.2s var(--ease-quiet),
-              color 0.2s var(--ease-quiet),
-              border-color 0.2s var(--ease-quiet),
-              transform 0.2s var(--ease-quiet);
+  transition: all 0.15s var(--ease-quiet);
   cursor: pointer;
 }
-.btn:focus-visible {
-  outline: 2px solid var(--signal-teal);
-  outline-offset: 2px;
+
+.btn-primary, .btn-champagne {
+  background-color: var(--champagne);
+  color: var(--obsidian);
+  font-weight: 600;
+}
+.btn-primary:hover, .btn-champagne:hover {
+  background-color: #b8913d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(201, 162, 75, 0.3);
 }
 
-/* Primary CTA — solid accent fill, dark text for max contrast. */
-.btn-primary {
-  background-color: var(--marigold-gold);
-  color: #0F172A; /* slate-900 — guaranteed contrast on gold */
+.btn-obsidian {
+  background-color: var(--obsidian);
+  color: var(--paper);
+  border: 1px solid rgba(243, 241, 234, 0.15);
 }
-.btn-primary:hover  { background-color: #d18a26; } /* darker gold hover */
-.btn-primary:active { transform: scale(0.985); }
+.btn-obsidian:hover {
+  border-color: var(--champagne);
+  transform: translateY(-2px);
+}
 
-/* Secondary CTA — ghost outline. Adaptive: works on dark or light. */
 .btn-ghost {
   background-color: transparent;
-  color: var(--paper);                 /* default: on dark */
-  border: 1px solid rgba(248, 250, 252, 0.35);
+  color: var(--paper);
+  border: 1px solid rgba(243, 241, 234, 0.25);
 }
-.btn-ghost:hover { background-color: rgba(248, 250, 252, 0.08); border-color: rgba(248, 250, 252, 0.6); }
-.btn-ghost-light { /* ghost used on light backgrounds */
-  color: #0F172A;
-  border-color: rgba(15, 23, 42, 0.25);
+.btn-ghost:hover {
+  border-color: var(--champagne);
+  background-color: rgba(243, 241, 234, 0.05);
 }
-.btn-ghost-light:hover { background-color: rgba(15, 23, 42, 0.06); border-color: rgba(15, 23, 42, 0.5); }
 
-/* Quiet reduced-motion baseline (components also guard JS animation). */
+/* Restrained Luxury Card Hover */
+.luxury-card {
+  transition: border-color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+}
+.luxury-card:hover {
+  border-color: var(--champagne) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(16, 16, 18, 0.12);
+}
+
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* Global focus-visible state for accessibility across interactive elements */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 2px solid var(--signal-teal) !important;
-  outline-offset: 2px !important;
 }

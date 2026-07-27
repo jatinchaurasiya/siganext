@@ -1,22 +1,30 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Fraunces, Manrope, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
+import PageProgressRail from "@/components/PageProgressRail";
 import { Analytics } from "@vercel/analytics/next";
 
-const spaceGrotesk = Space_Grotesk({
+const bricolageGrotesque = Bricolage_Grotesque({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["800"],
   display: "swap",
 });
 
-const ibmPlexSans = IBM_Plex_Sans({
+const fraunces = Fraunces({
+  variable: "--font-editorial",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+});
+
+const manrope = Manrope({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -30,42 +38,31 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://siganext.com"),
   title: {
-    default: "Siganext | Internet, Solar & IT Solutions – Nashik & Maharashtra",
-    template: "%s | Siganext",
+    default: "Siganext | Connectivity. Power. Technology. – Nashik & Maharashtra",
+    template: "%s | Siganext Networks",
   },
   description:
-    "Carrier-grade fiber internet, enterprise rooftop solar, IT hardware & CCTV security, and managed hosting from one Nashik-based operator across Maharashtra & Goa.",
+    "One provider for broadband & network infrastructure, rooftop solar & green energy, and enterprise IT, software & security across Maharashtra & Goa.",
   keywords: [
     "Siganext",
-    "Siganext Networks",
+    "Siganext Networks and Green Energy Solutions Private Limited",
     "Solar Installation Nashik",
-    "Fiber Broadband Nashik",
-    "Leased Line Internet Maharashtra",
-    "IT Hardware AMC Nashik",
-    "CCTV Camera Installation Nashik",
-    "Data Center Hosting Maharashtra",
-    "Government Tender Solar Vendor",
+    "Fiber Broadband Leased Line Nashik",
+    "IT Hardware Security AMC Nashik",
+    "Data Center Managed Hosting Maharashtra",
+    "Government Tender Eligible Solar Vendor",
   ],
   authors: [{ name: "Siganext Networks" }],
   creator: "Siganext Networks and Green Energy Solutions Private Limited",
   publisher: "Siganext Networks and Green Energy Solutions Private Limited",
   openGraph: {
-    title: "Siganext | Internet, Solar & IT Solutions – Nashik & Maharashtra",
+    title: "Siganext | Connectivity. Power. Technology.",
     description:
-      "Carrier-grade fiber internet, enterprise rooftop solar, IT hardware & CCTV security, and managed hosting from one Nashik-based operator across Maharashtra & Goa.",
+      "Integrated broadband ISP, solar green energy EPC, and enterprise IT security solutions from one Nashik-based operator across Maharashtra & Goa.",
     url: "https://siganext.com",
     siteName: "Siganext",
     locale: "en_IN",
     type: "website",
-    /* [OG IMAGE: Replace /og-default.jpg with production 1200x630 OpenGraph asset] */
-    images: [
-      {
-        url: "/og-default.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Siganext Integrated Networks, Solar & IT Infrastructure Nashik Maharashtra",
-      },
-    ],
   },
   robots: {
     index: true,
@@ -74,7 +71,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0B1220",
+  themeColor: "#101012",
   width: "device-width",
   initialScale: 1,
 };
@@ -84,7 +81,7 @@ const jsonLdLocalBusiness = {
   "@type": "LocalBusiness",
   "name": "Siganext Networks and Green Energy Solutions Private Limited",
   "alternateName": "Siganext",
-  "url": "[CONFIRM final domain]",
+  "url": "https://siganext.com",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Nashik",
@@ -103,7 +100,7 @@ const jsonLdLocalBusiness = {
   "identifier": {
     "@type": "PropertyValue",
     "name": "CIN",
-    "value": "[CONFIRM]"
+    "value": "[CONFIRM: CIN pending confirmation]"
   }
 };
 
@@ -115,7 +112,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${bricolageGrotesque.variable} ${fraunces.variable} ${manrope.variable} ${ibmPlexMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>
@@ -124,12 +121,13 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdLocalBusiness) }}
         />
       </head>
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+      <body className="min-h-full flex flex-col bg-bone text-obsidian font-body" suppressHydrationWarning>
         <SmoothScroll>
           <Header />
-          <main className="flex-1 pt-16 md:pt-18">{children}</main>
+          <main className="flex-1">{children}</main>
           <Footer />
         </SmoothScroll>
+        <PageProgressRail />
         <Analytics />
       </body>
     </html>
