@@ -3,7 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import SectionDivider from "@/components/SectionDivider";
 import NetworkTraceLine from "@/components/NetworkTraceLine";
-import SecurityShield3D from "@/components/SecurityShield3D";
+import SecurityGrid2D from "@/components/SecurityGrid2D";
 import Card3DTilt from "@/components/Card3DTilt";
 import MagneticButton from "@/components/MagneticButton";
 import ParticleField from "@/components/ParticleField";
@@ -329,9 +329,9 @@ export default function ItSoftwareSecurityPage() {
             </div>
           </Reveal>
 
-          {/* 3D Interactive WebGL Security Matrix */}
+          {/* 2D Interactive Security Grid */}
           <Reveal delay={0.15}>
-            <SecurityShield3D />
+            <SecurityGrid2D />
           </Reveal>
         </div>
 

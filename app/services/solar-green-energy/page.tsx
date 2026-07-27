@@ -3,7 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import SectionDivider from "@/components/SectionDivider";
 import NetworkTraceLine from "@/components/NetworkTraceLine";
-import SolarGrid3D from "@/components/SolarGrid3D";
+import SolarMatrix2D from "@/components/SolarMatrix2D";
 import Card3DTilt from "@/components/Card3DTilt";
 import MagneticButton from "@/components/MagneticButton";
 
@@ -312,9 +312,9 @@ export default function SolarGreenEnergyPage() {
             </div>
           </Reveal>
 
-          {/* 3D Interactive WebGL Solar Array */}
+          {/* 2D Interactive Solar Photovoltaic Array */}
           <Reveal delay={0.15}>
-            <SolarGrid3D />
+            <SolarMatrix2D />
           </Reveal>
         </div>
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import SectionDivider from "@/components/SectionDivider";
-import HeroScene from "@/components/HeroSceneWrapper";
+import HeroScene2D from "@/components/HeroScene2D";
 import Reveal from "@/components/Reveal";
 import HeroEntrance from "@/components/HeroEntrance";
 import HomeFAQ from "@/components/HomeFAQ";
@@ -113,8 +113,8 @@ export default function HomePage() {
           }}
         />
 
-        {/* 3D scene — full-bleed backdrop, behind everything, no clipping/overflow */}
-        <HeroScene fill />
+        {/* 2D Mesh scene — full-bleed backdrop, behind everything */}
+        <HeroScene2D fill />
 
         {/* foreground scrim so text stays readable over the scene on any width */}
         <div

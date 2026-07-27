@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import BrandLogo from "@/components/BrandLogo";
 
 const LEGAL_NAME =
   "Siganext Networks and Green Energy Solutions Private Limited";
@@ -81,10 +82,7 @@ export default function Footer() {
         {/* Col 1 — legal */}
         <div className="max-w-xs">
           <div className="flex items-center gap-2 mb-4">
-            <span className="font-display font-semibold text-paper text-lg flex items-center gap-2">
-              Siganext
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-marigold-gold" />
-            </span>
+            <BrandLogo height={36} />
           </div>
           <p className="text-sm text-paper/75 leading-relaxed">{LEGAL_NAME}</p>
           <p className="font-mono uppercase text-[11px] tracking-[0.08em] text-paper/60 mt-3">

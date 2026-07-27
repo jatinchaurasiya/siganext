@@ -4,7 +4,7 @@ import Reveal from "@/components/Reveal";
 import SectionDivider from "@/components/SectionDivider";
 import CheckAvailabilityModule from "@/components/CheckAvailabilityModule";
 import NetworkTraceLine from "@/components/NetworkTraceLine";
-import NetworkGlobe3D from "@/components/NetworkGlobe3D";
+import NetworkTopology2D from "@/components/NetworkTopology2D";
 import Card3DTilt from "@/components/Card3DTilt";
 import MagneticButton from "@/components/MagneticButton";
 
@@ -291,9 +291,9 @@ export default function InternetNetworkingPage() {
             </p>
           </Reveal>
 
-          {/* 3D Interactive WebGL Globe */}
+          {/* 2D Interactive Carrier Fiber Matrix */}
           <Reveal delay={0.15}>
-            <NetworkGlobe3D />
+            <NetworkTopology2D />
           </Reveal>
         </div>
 

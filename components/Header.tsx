@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import MagneticButton from "@/components/MagneticButton";
+import BrandLogo from "@/components/BrandLogo";
 
 const NAV = [
   { label: "Home", href: "/" },
@@ -157,14 +158,8 @@ export default function Header() {
         }`}
       >
         <div className="px-4 md:px-6 h-12 md:h-14 flex items-center justify-between gap-4">
-          {/* Wordmark */}
-          <Link
-            href="/"
-            className="font-display font-bold text-paper text-[1.2rem] md:text-[1.35rem] leading-none tracking-[-0.02em] flex items-center gap-2 hover:text-signal-teal transition-colors duration-200"
-          >
-            Siganext
-            <span className="inline-block w-2 h-2 rounded-full bg-marigold-gold shadow-[0_0_8px_#E8A33D]" />
-          </Link>
+          {/* Wordmark with Brand Logo */}
+          <BrandLogo height={32} />
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-8">
