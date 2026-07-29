@@ -37,11 +37,11 @@ export default function Footer() {
           <div className="pt-2 space-y-1 font-mono text-[11px] uppercase tracking-[0.08em] text-mist">
             <p className="flex items-center gap-2">
               <span>CIN:</span>
-              <ConfirmTag label="CIN Pending" variant="inline" />
+              <ConfirmTag label="U43212MR2026PTC473563" variant="inline" />
             </p>
             <p className="flex items-center gap-2">
               <span>Registered Office:</span>
-              <ConfirmTag label="Office Address" variant="inline" />
+              <ConfirmTag label="2nd Floor, Above HDFC Bank, Rutica Heights, Peth Road, Panchavati, Nashik 422003" variant="inline" />
             </p>
           </div>
         </div>
@@ -85,7 +85,7 @@ export default function Footer() {
           </h3>
           <div className="space-y-3">
             <a
-              href="https://wa.me/910000000000"
+              href="https://wa.me/917770009790"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-champagne/10 border border-champagne/30 text-champagne font-mono text-xs uppercase tracking-[0.08em] hover:bg-champagne/20 transition-colors"
